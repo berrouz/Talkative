@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -20,9 +21,9 @@ public enum Sender {
     // Thread that upon request resend to all the current clients full list of contacts
     public class SenderOfContactsThread extends Thread{
         public void run(){
-            for(Contact c: MainServer.currentlyActiveContacts.getContactList()){
+            for(Contact c: MainServer.currentlyActiveContacts.getCurrentlyActiveContacts()){
                 try {
-                    Set<Contact> contactListToBeSent = MainServer.currentlyActiveContacts.getContactList();
+                    Set<Contact> contactListToBeSent = MainServer.currentlyActiveContacts.getCurrentlyActiveContactsCopy();
                     contactListToBeSent.remove(c);
                     // if at least one contact in the contact list then update the client
                     if(contactListToBeSent.size()>0){

@@ -69,7 +69,7 @@ public class Receiver {
     }
     // Thread reads from accepted socket Messages from Clients
     private class ReadingObjectFromClientSocketThread extends Thread{
-        public void run(){
+        public synchronized void run(){
             while(true){
                 try {
                     // getting client's socket
@@ -81,9 +81,9 @@ public class Receiver {
                         content.append(temp);
                     }
                     Message receivedObject = new Gson().fromJson(content.toString(), Message.class);
-                    logger.info("Before adding a new client in the list are "+ MainServer.currentlyActiveContacts);
+                    logger.info("Before adding a new client in the list are "+ MainServer.currentlyActiveContacts.getCurrentlyActiveContacts().size());
                     MainServer.currentlyActiveContacts.updateContacts(receivedObject.getFromWhom(), receivedObject.getType());
-                    logger.info("currentlyActiveContacts size is "+ MainServer.currentlyActiveContacts);
+                    logger.info("currentlyActiveContacts size is "+ MainServer.currentlyActiveContacts.getCurrentlyActiveContacts().size());
 
                 } catch (IOException e) {
                     System.out.println("Error while reading from buffered reader");

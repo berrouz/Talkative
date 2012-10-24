@@ -20,7 +20,7 @@ public class Runner {
 class View extends JFrame{
     private static int defaultLocationX = 400;
     private static int defaultLocationY = 300;
-    private static String windowName = "Schwatzer Communicator";
+    private static String windowName = "Simple Communicator";
     private static Dimension defaultDimension = new Dimension(300, 600);
     protected JTextArea textAreaToSend = new JTextArea("");
     protected final JTextArea receivedMessages = new JTextArea("");
@@ -34,7 +34,7 @@ class View extends JFrame{
     private java.util.Set<Contact> contactsData;
 
     View(ClientBase clientBase){
-        super(windowName);
+        super(clientBase.myContact.getFirstName()+" "+clientBase.myContact.getLastName());
        // to model
         this.contactsData = clientBase.receiver.getCurrentContactList();
         for(Contact c: contactsData){
