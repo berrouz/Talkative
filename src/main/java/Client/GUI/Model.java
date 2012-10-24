@@ -1,4 +1,5 @@
 package Client.GUI;
+import Client.ClientBase;
 import Client.Contact;
 import Client.Receiver;
 import Shared.Message;
@@ -32,7 +33,7 @@ public class Model {
             if(view.names.getItemCount()!= Receiver.instance.getCurrentContactList().size()){
                 view.names.removeAllItems();
                 // delete my contact from the display list
-                //Receiver.instance.getCurrentContactList().remove(ClientBase.myContact);
+                Receiver.instance.getCurrentContactList().remove(ClientBase.myContact);
                 for(Contact contact: Receiver.instance.getCurrentContactList()){
                     view.names.addItem(contact);
                 }

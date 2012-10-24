@@ -10,9 +10,6 @@ public class MainServer {
     public static final MainServer single = new MainServer();
     protected static final Contact serverContact = new Contact("Server", "Server!", "", serverIpAddress, serverPort);
     public static final CurrentlyActiveAccounts currentlyActiveContacts = new CurrentlyActiveAccounts();
-    public static void main(String[] args) {
-        single.start();
-    }
     public void start(){
         System.out.println("Server is started in " + serverIpAddress + ":" + serverPort);
         receiver.startReceiver();
