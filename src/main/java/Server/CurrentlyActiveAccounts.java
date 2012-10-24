@@ -41,7 +41,7 @@ public class CurrentlyActiveAccounts {
      *  deep copy of current contact list
      * @return Set<Contact>
      */
-    public Set<Contact> getCurrentlyActiveContactsCopy(){
+    public synchronized Set<Contact> getCurrentlyActiveContactsCopy(){
         HashSet<Contact> response = new HashSet<Contact>();
         for(Contact contact: currentlyActiveContacts){
             response.add(contact);
@@ -54,7 +54,7 @@ public class CurrentlyActiveAccounts {
      * current list of contacts
      * @return Set<Contact>
      */
-    public Set<Contact> getCurrentlyActiveContacts() {
+    public synchronized Set<Contact> getCurrentlyActiveContacts() {
         return currentlyActiveContacts;
     }
 }

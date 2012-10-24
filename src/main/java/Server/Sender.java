@@ -21,7 +21,9 @@ public enum Sender {
     // Thread that upon request resend to all the current clients full list of contacts
     public class SenderOfContactsThread extends Thread{
         public void run(){
-            for(Contact c: MainServer.currentlyActiveContacts.getCurrentlyActiveContacts()){
+            Set<Contact> contactsListWhomToSend = MainServer.currentlyActiveContacts.getCurrentlyActiveContacts();
+            synchronized (contactsListWhomToSend){
+            for(Contact c: contactsListWhomToSend){
                 try {
                     Set<Contact> contactListToBeSent = MainServer.currentlyActiveContacts.getCurrentlyActiveContactsCopy();
                     contactListToBeSent.remove(c);
@@ -40,6 +42,7 @@ public enum Sender {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
             }
         }
     };
