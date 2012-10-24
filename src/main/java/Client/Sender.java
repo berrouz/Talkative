@@ -8,8 +8,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 public class Sender {
     private Queue<Message> messageOutputQueue = new LinkedList<Message>();
-    public static final Sender instance = new Sender();
-
     public void addMessage(Message message){
         messageOutputQueue.add(message);
         sendMessage(messageOutputQueue.poll());
@@ -27,5 +25,4 @@ public class Sender {
         printWriter.flush();
         printWriter.close();
     }
-
 }

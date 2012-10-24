@@ -12,11 +12,13 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public class Controller {
+    private ClientBase clientBase;
     private Model model;
     private View view;
-    public Controller(Model m, View v){
+    public Controller(Model m, View v, ClientBase clientBase){
         this.model = m;
         this.view  = v;
+        this.clientBase = clientBase;
         view.sendButton.addActionListener(new ClickOnSendButtonListener());
         view.addWindowListener(new MainWindowListener());
     }
@@ -24,11 +26,9 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             String textToBeSent = view.textAreaToSend.getText();
-            Sender sender = Sender.instance;
-            System.out.println(view.names.getSelectedItem()+"  selected");
-            Contact senderContact = Receiver.instance.getContact((Contact) view.names.getSelectedItem());
-            System.out.println("Message should be sent to "+ senderContact.toString());
-            sender.addMessage(new Message(textToBeSent, Message.MESSAGE_TYPES.SMS, senderContact, ClientBase.myContact));
+            Sender sender = clientBase.sender;
+            Contact senderContact = clientBase.receiver.getContact((Contact) view.names.getSelectedItem());
+            sender.addMessage(new Message(textToBeSent, Message.MESSAGE_TYPES.SMS, senderContact, clientBase.myContact));
             view.textAreaToSend.setText("");
         }
     }
@@ -40,9 +40,7 @@ public class Controller {
 
         @Override
         public void windowClosing(WindowEvent e) {
-            System.out.println("closed");
-            Sender sender = Sender.instance;
-            sender.addMessage(new Message("", Message.MESSAGE_TYPES.REMOVE_CONTACT, ClientBase.multiServerContact, ClientBase.myContact));
+            clientBase.sender.addMessage(new Message("", Message.MESSAGE_TYPES.REMOVE_CONTACT, ClientBase.multiServerContact, clientBase.myContact));
         }
 
         @Override

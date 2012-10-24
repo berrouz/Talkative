@@ -44,4 +44,20 @@ public class Contact{
         Contact c = (Contact) o;
         return  c.firstName.equals(firstName) && c.lastName.equals(lastName);
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }

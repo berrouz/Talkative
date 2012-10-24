@@ -2,20 +2,20 @@ package Server;
 
 import Shared.Message;
 import com.google.gson.Gson;
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public enum Receiver {
-    INSTANCE;
-
+public class Receiver {
     // object for synchronization
     private final Object lock = new Object();
     private Socket receivedSocket;
     private boolean hasSocket = false;
-
+    private Logger logger = Logger.getLogger(Receiver.class.getName());
     // starting 2 threads and synchronize both on lock object
     public void startReceiver(){
         new ListeningForContactsThread().start();
@@ -67,7 +67,7 @@ public enum Receiver {
             }
         }
     }
-
+    // Thread reads from accepted socket Messages from Clients
     private class ReadingObjectFromClientSocketThread extends Thread{
         public void run(){
             while(true){
@@ -81,7 +81,9 @@ public enum Receiver {
                         content.append(temp);
                     }
                     Message receivedObject = new Gson().fromJson(content.toString(), Message.class);
+                    logger.info("Before adding a new client in the list are "+ MainServer.currentlyActiveContacts);
                     MainServer.currentlyActiveContacts.updateContacts(receivedObject.getFromWhom(), receivedObject.getType());
+                    logger.info("currentlyActiveContacts size is "+ MainServer.currentlyActiveContacts);
 
                 } catch (IOException e) {
                     System.out.println("Error while reading from buffered reader");

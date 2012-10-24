@@ -1,16 +1,17 @@
 package Client.GUI;
+import Client.ClientBase;
 import Client.Contact;
 import Client.Receiver;
 import javax.swing.*;
 import java.awt.*;
 public class Runner {
-    public Runner(){
+    public Runner(final ClientBase clientBase){
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                View view = new View();
-                Model model = new Model(view);
-                new Controller(model, view);
+                View view = new View(clientBase);
+                Model model = new Model(view, clientBase);
+                new Controller(model, view, clientBase);
             }
         });
     }
@@ -27,14 +28,15 @@ class View extends JFrame{
     protected final JComboBox names = new JComboBox();
     protected JScrollPane jScrollPaneReceivedMessages;
     protected final JButton sendButton = new JButton("Send");
+    private ClientBase clientBase;
 
     // data from model which are loaded into GUI
     private java.util.Set<Contact> contactsData;
 
-    View(){
+    View(ClientBase clientBase){
         super(windowName);
        // to model
-        this.contactsData = Receiver.instance.getCurrentContactList();
+        this.contactsData = clientBase.receiver.getCurrentContactList();
         for(Contact c: contactsData){
             names.addItem(c.toString());
         }

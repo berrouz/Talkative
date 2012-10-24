@@ -14,10 +14,11 @@ public class Receiver{
     private Queue<Message> inputMessageQueue =  new LinkedList<Message>();
     private Set<Contact> currentContactList = new HashSet<Contact>();
     private Queue<Message> messages = new LinkedList<Message>();
-    public static final Receiver instance = new Receiver();
+    private Contact myContact;
 
-    private Receiver(){
+    public void start(Contact myContact){
         startReceivingMessages();
+        this.myContact = myContact;
     }
     public void startReceivingMessages(){
         new MessageReceiverThread().start();
@@ -27,18 +28,21 @@ public class Receiver{
         return messages;
     }
 
+    // Thread that listens to server when server send the list of contacts
     private class MessageReceiverThread extends Thread{
         public void run(){
             while(true){
-                BufferedReader inputBuffer;
                 try {
-                    System.out.println("MessageReceiverThread is started from Receiver");
-                    ServerSocket clientSocket = new ServerSocket(ClientBase.myContact.getPort());
+                    Thread.sleep(1000);
+                    ServerSocket clientSocket = new ServerSocket(myContact.getPort());
                     Socket inputSocket = clientSocket.accept();
-                    inputBuffer = new BufferedReader(new InputStreamReader(inputSocket.getInputStream()));
+                    BufferedReader inputBuffer = new BufferedReader(new InputStreamReader(inputSocket.getInputStream()));
                     new AcceptedSocketReader(inputBuffer).start();
                     clientSocket.close();
+
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -72,7 +76,7 @@ public class Receiver{
                 switch (message.getType()){
                     case CONTACT_LIST:
                         Type setType = new TypeToken<Set<Contact>>(){}.getType();
-                        Receiver.instance.currentContactList = new Gson().fromJson(message.getData(), setType);
+                        currentContactList = new Gson().fromJson(message.getData(), setType);
                         break;
                     case SMS:
                         getMessages().add(message);
