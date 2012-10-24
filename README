@@ -1,2 +1,8 @@
-This file was created by IntelliJ IDEA 11.1.3 for binding GitHub repository
-This file was modified by IntelliJ IDEA 11.1.3 for binding GitHub repository
+Test project
+
+Client-Server Communicator
+
+1. Server starts before clients and listens to clients on specified port. Client starts and send "Hello" message to the Server host
+2. Server hosts receives the message, update the list on active contacts and resend it all currently active clients
+3. Client receives a list of contacts and they are displayed in Swing component.
+4. If client disconnect, a message is sent and the server get this information and update the clients with the a new contact list
