@@ -1,5 +1,6 @@
 package Server;
 
+import Server.Interfaces.Receiver;
 import Shared.Message;
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
@@ -9,21 +10,34 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 
-public class Receiver {
+public class ReceiverImpl implements Receiver {
+    private String ipAddress;
+    private int port;
+    private List<Message> inputMessages;
     // object for synchronization
     private final Object lock = new Object();
     private Socket receivedSocket;
     private boolean hasSocket = false;
-    private Logger logger = Logger.getLogger(Receiver.class.getName());
+    private Logger logger = Logger.getLogger(Receiver.class);
     // starting 2 threads and synchronize both on lock object
-    public void startReceiver(){
+
+    /**
+     * Constructor of Receiver
+     * @param ipAddress
+     * @param port
+     * @param inputMessages
+     */
+    public ReceiverImpl(String ipAddress, int port, List<Message> inputMessages){
+        this.ipAddress  = ipAddress;
+        this.port       = port;
+        this.inputMessages = inputMessages;
         new ListeningForContactsThread().start();
         new ReadingObjectFromClientSocketThread().start();
     }
 
-
-    public void putSocket(Socket acceptedSocket){
+    private void putSocket(Socket acceptedSocket){
         synchronized (lock){
             if(hasSocket){
                 try {
@@ -38,7 +52,10 @@ public class Receiver {
         }
     }
 
-    public void getSocket(){
+
+    // if there is no accepted connections ReadingObjectFromClientSocketThread thread starts sleeping until
+    // ListeningForContactsThread wakes it through putSocket method
+    private void getSocket(){
         synchronized (lock){
             if(!hasSocket){
                 try {
@@ -52,10 +69,10 @@ public class Receiver {
         }
     }
 
-
     /**
-     *  Thread listens for hello messages from clients
+     *  Thread listens for hello messages from clients and accept connection
      */
+
     private class ListeningForContactsThread extends Thread{
         public void run(){
             while(true){
@@ -87,8 +104,8 @@ public class Receiver {
                     while((temp = inputStream.readLine())!= null){
                         content.append(temp);
                     }
-                    Message receivedObject = new Gson().fromJson(content.toString(), Message.class);
-                    MainServer.currentlyActiveContacts.updateContacts(receivedObject.getFromWhom(), receivedObject.getType());
+                    Message message = new Gson().fromJson(content.toString(), Message.class);
+                    inputMessages.add(message);
 
                 } catch (IOException e) {
                     System.out.println("Error while reading from buffered reader");
@@ -97,6 +114,29 @@ public class Receiver {
 
             }
         }
+    }
 
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public List<Message> getInputMessages() {
+        return inputMessages;
+    }
+
+    public void setInputMessages(List<Message> inputMessages) {
+        this.inputMessages = inputMessages;
     }
 }
