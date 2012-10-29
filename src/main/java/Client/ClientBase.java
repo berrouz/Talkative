@@ -1,7 +1,9 @@
 package Client;
 import Client.GUI.Runner;
+import Shared.Contact;
 import Shared.Message.MESSAGE_TYPES;
 import Shared.Message;
+import Shared.Sender;
 import org.apache.log4j.Logger;
 
 public class ClientBase {

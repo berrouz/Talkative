@@ -1,6 +1,8 @@
 package Server;
 
-import Client.Contact;
+import Shared.Contact;
+import Shared.Message;
+import Shared.Sender;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -17,7 +19,6 @@ public class Handler {
     public Contact myContact = new Contact("Server", "server", "photo", "127.0.0.1", 7000);
 
     private Sender sender = new Sender();
-    private ReceivedMessages receivedMessages = new ReceivedMessages();
     private List<Contact> currentContactList = new ArrayList<Contact>();
 
     public void handleMessage(Message message){

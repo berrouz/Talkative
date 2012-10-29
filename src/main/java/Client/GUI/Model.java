@@ -1,7 +1,6 @@
 package Client.GUI;
 import Client.ClientBase;
-import Client.Contact;
-import Client.Receiver;
+import Shared.Contact;
 import Shared.Message;
 
 import java.awt.*;

@@ -1,7 +1,7 @@
 package Client.GUI;
 import Client.ClientBase;
-import Client.Contact;
-import Client.Receiver;
+import Shared.Contact;
+
 import javax.swing.*;
 import java.awt.*;
 public class Runner {

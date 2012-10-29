@@ -1,6 +1,5 @@
 package Shared;
 
-import Client.Contact;
 import com.google.gson.Gson;
 public final class Message implements SendableAsJson{
     private String name="";

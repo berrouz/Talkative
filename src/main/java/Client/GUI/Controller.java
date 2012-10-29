@@ -1,10 +1,9 @@
 package Client.GUI;
 
 import Client.ClientBase;
-import Client.Contact;
-import Client.Receiver;
-import Client.Sender;
+import Shared.Contact;
 import Shared.Message;
+import Shared.Sender;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +27,7 @@ public class Controller {
             String textToBeSent = view.textAreaToSend.getText();
             Sender sender = clientBase.sender;
             Contact senderContact = clientBase.receiver.getContact((Contact) view.names.getSelectedItem());
-            sender.addMessage(new Message(textToBeSent, Message.MESSAGE_TYPES.SMS, senderContact, clientBase.myContact));
+            sender.sendMessage(new Message(textToBeSent, Message.MESSAGE_TYPES.SMS, senderContact, clientBase.myContact));
             view.textAreaToSend.setText("");
         }
     }
@@ -40,7 +39,7 @@ public class Controller {
 
         @Override
         public void windowClosing(WindowEvent e) {
-            clientBase.sender.addMessage(new Message("", Message.MESSAGE_TYPES.REMOVE_CONTACT, ClientBase.multiServerContact, clientBase.myContact));
+            clientBase.sender.sendMessage(new Message("", Message.MESSAGE_TYPES.REMOVE_CONTACT, ClientBase.multiServerContact, clientBase.myContact));
         }
 
         @Override
