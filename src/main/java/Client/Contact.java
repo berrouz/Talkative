@@ -7,6 +7,7 @@ public class Contact{
     private volatile int hashCode;
     private int port;
 
+    public Contact(){}
     public Contact(String f, String l, String photo, String ipAddress, int port){
         this.firstName = f;
         this.lastName  = l;

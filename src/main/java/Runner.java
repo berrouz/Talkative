@@ -1,11 +1,12 @@
 import Client.ClientBase;
-import Server.MainServer;
 
 public class Runner {
     public static void main(String[] args) {
-        new MainServer().start();
 
+        new Server.Server().start();
         try {
+            new Server.Server();
+            Thread.sleep(500);
             new ClientBase("Mihail", "Petrov", 8001);
             Thread.sleep(500);
             new ClientBase("Sergey", "Dunkan", 8000);

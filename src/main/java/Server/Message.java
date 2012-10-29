@@ -1,7 +1,9 @@
-package Shared;
+package Server;
 
 import Client.Contact;
+import Shared.SendableAsJson;
 import com.google.gson.Gson;
+
 public final class Message implements SendableAsJson{
     private String name="";
     private MESSAGE_TYPES type;

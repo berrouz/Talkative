@@ -1,25 +1,27 @@
 package Server;
 
-import Client.Contact;
-import Server.Interfaces.Sender;
-import Shared.Message;
-import com.google.gson.Gson;
 import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class SenderImpl implements Sender {
-
+/**
+ * Created with IntelliJ IDEA.
+ * User: shevchik
+ * Date: 29.10.12
+ * Time: 12:00
+ * To change this template use File | Settings | File Templates.
+ */
+public class Sender {
     private Logger logger = Logger.getLogger(Sender.class);
 
-    @Override
-    public void sendMessage(Message message) {
-        sendToSocket(message);
-    }
-
-    public void sendToSocket(Message message){
+    /**
+     * send Message to the recipient, mentioned in Message object
+     * @param message
+     */
+    public void sendMessage(Message message){
         try {
             Socket socket = new Socket(message.getToWhom().getIpAddress(), message.getToWhom().getPort());
             OutputStreamWriter outputBuffer = new OutputStreamWriter(socket.getOutputStream());
@@ -29,7 +31,7 @@ public class SenderImpl implements Sender {
             printWriter.close();
             socket.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 }
