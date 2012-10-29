@@ -16,30 +16,23 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class Handler {
-    public Contact myContact = new Contact("Server", "server", "photo", "127.0.0.1", 7000);
+    private Spammer spammer;
 
-    private Sender sender = new Sender();
     private List<Contact> currentContactList = new ArrayList<Contact>();
 
+    public Handler(){
+        this.spammer = new Spammer();
+    }
     public void handleMessage(Message message){
         switch (message.getType()){
             case ADD_CONTACT    :
                 currentContactList.add(message.getFromWhom())     ;
-                updateAllClients();
+                spammer.sendToAll(currentContactList);
                 break;
-            case REMOVE_CONTACT : currentContactList.remove(message.getFromWhom())  ;
-                updateAllClients();
+            case REMOVE_CONTACT :
+                currentContactList.remove(message.getFromWhom())  ;
+                spammer.sendToAll(currentContactList);
                 break;
-        }
-    }
-
-    /**
-     * update all clients in currentClientList
-     */
-    public void updateAllClients(){
-
-        for(Contact contact: currentContactList){
-            sender.sendMessage(new Message(new Gson().toJson(currentContactList), Message.MESSAGE_TYPES.CONTACT_LIST, contact, myContact));
         }
     }
 }

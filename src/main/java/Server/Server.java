@@ -12,7 +12,7 @@ import Shared.Receiver;
  */
 public class Server {
     private static Handler handler = new Handler();
-    private Receiver receiver = new Receiver(handler.myContact.getIpAddress(), handler.myContact.getPort());
+    private Receiver receiver = new Receiver(Global.SERVER_CONTACT.myContact.getIpAddress(), Global.SERVER_CONTACT.myContact.getPort());
 
     public void start(){
         new Thread(new Runnable() {
