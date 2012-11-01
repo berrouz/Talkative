@@ -18,11 +18,13 @@ public class MessageQueue {
     private Queue<Contact> contactList;
     private Queue<Message> inputMessages;
     private Queue<Message> outputMessages;
+    private boolean contactListChanged;
     public MessageQueue(){
         this.input          = new LinkedList<Message>();
         this.contactList    = new LinkedList<Contact>();
         this.inputMessages  = new LinkedList<Message>();
         this.outputMessages = new LinkedList<Message>();
+        this.contactListChanged = false;
     }
 
     public Queue<Message> getInput() {
@@ -39,6 +41,7 @@ public class MessageQueue {
 
     public void setContactList(Queue<Contact> contactList) {
         this.contactList = contactList;
+        this.contactListChanged = true;
     }
 
     public Queue<Message> getInputMessages() {
@@ -55,5 +58,9 @@ public class MessageQueue {
 
     public void setOutputMessages(Queue<Message> outputMessages) {
         this.outputMessages = outputMessages;
+    }
+
+    public boolean contactListChanged(){
+        return contactListChanged;
     }
 }

@@ -24,6 +24,11 @@ public class SmsReader implements Runnable{
     public void run() {
         Message message;
         while(true){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             if((message = messageQueue.getInputMessages().poll())!= null){
                 view.receivedMessages.append(message.getFromWhom().toString() +" :");
                 view.receivedMessages.append(message.getData() + "\n");

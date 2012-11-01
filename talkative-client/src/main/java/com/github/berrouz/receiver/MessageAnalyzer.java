@@ -28,16 +28,25 @@ public class MessageAnalyzer implements Runnable{
     @Override
     public void run() {
         Message message;
-        if ((message = messageQueue.getInput().poll()) != null) {
-            switch (message.getType()) {
-                case CONTACT_LIST:
-                    Type setType = new TypeToken<Set<Contact>>() {
-                    }.getType();
-                    messageQueue.setContactList((Queue<Contact>) new Gson().fromJson(message.getData(), setType));
-                    break;
-                case SMS:
-                    messageQueue.getInputMessages().add(message);
-                    break;
+        while(true){
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if ((message = messageQueue.getInput().poll()) != null) {
+                System.out.println(message);
+                switch (message.getType()) {
+                    case CONTACT_LIST:
+                        Type setType = new TypeToken<Queue<Contact>>() {
+                        }.getType();
+                        messageQueue.setContactList((Queue<Contact>) new Gson().fromJson(message.getData(), setType));
+                        System.out.println("  message queue is " + messageQueue.getContactList().size());
+                        break;
+                    case SMS:
+                        messageQueue.getInputMessages().add(message);
+                        break;
+                }
             }
         }
     }

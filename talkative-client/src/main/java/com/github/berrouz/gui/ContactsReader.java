@@ -26,10 +26,13 @@ public class ContactsReader implements Runnable{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            view.names.removeAllItems();
-            for(Contact c: messageQueue.getContactList()){
-                view.names.addItem(c);
+            if(messageQueue.contactListChanged()){
+                view.names.removeAllItems();
+                for(Contact c: messageQueue.getContactList()){
+                    view.names.addItem(c);
+                }
             }
+            System.out.println(messageQueue.getContactList().size() + " size of contacts");
         }
     }
 }

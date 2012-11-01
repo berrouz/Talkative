@@ -5,6 +5,7 @@ import com.github.berrouz.MessageQueue;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,8 +32,11 @@ public class ReceiverThread implements Runnable{
             e.printStackTrace();
         }
         while(true){
+            System.out.println("I am listening");
             try {
-                new Thread(new MessageThread(serverSocket.accept(), messageQueue));
+                Socket socket = serverSocket.accept();
+                new Thread(new MessageThread(socket, messageQueue)).start();
+                System.out.println("Message is received");
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -35,7 +35,7 @@ public class Controller {
 
     private class HelloSender extends WindowAdapter{
         @Override
-        public void windowActivated(WindowEvent e){
+        public void windowOpened(WindowEvent e){
             model.sendHelloMessage();
         }
     }

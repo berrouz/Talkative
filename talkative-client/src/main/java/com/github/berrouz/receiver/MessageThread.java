@@ -26,14 +26,17 @@ public class MessageThread implements Runnable {
 
     @Override
     public void run() {
-        BufferedReader bufferedReader = null;
+        BufferedReader bufferedReader;
+        System.out.println("MessageThread is col");
         try {
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String temp, result = "";
             while ((temp = bufferedReader.readLine()) != null) {
                 result = result.concat(temp);
             }
+            System.out.println(result);
             messageQueue.getInput().add(new Gson().fromJson(result, Message.class));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
