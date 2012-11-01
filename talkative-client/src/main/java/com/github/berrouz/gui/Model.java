@@ -4,6 +4,7 @@ import com.github.berrouz.Contact;
 import com.github.berrouz.Message;
 import com.github.berrouz.Global;
 import com.github.berrouz.MessageQueue;
+import org.apache.log4j.Logger;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,6 +17,7 @@ public class Model {
     private View view;
     private Contact myContact;
     private MessageQueue messageQueue;
+    private Logger logger = Logger.getLogger(Model.class);
     public Model(MessageQueue messageQueue, View view, Contact myContact){
         this.view = view;
         this.messageQueue = messageQueue;
@@ -37,6 +39,13 @@ public class Model {
     public void sendSMS(String textToBeSent, Contact toWhom){
         Message message = new Message(textToBeSent, Message.MESSAGE_TYPES.SMS, toWhom, myContact);
         sendMessage(message);
+        logger.info("Client sends hello message to the server");
+    }
+
+    public void sendHelloMessage(){
+        Message message = new Message("Hello", Message.MESSAGE_TYPES.ADD_CONTACT, Global.SERVER_CONTACT.myContact, myContact);
+        sendMessage(message);
+        logger.info("Client sends hello message to the server");
     }
 }
 

@@ -15,6 +15,7 @@ public class Controller {
         this.view  = v;
         view.sendButton.addActionListener(new ClickOnSendButtonListener());
         view.addWindowListener(new MainWindowListener());
+        view.addWindowListener(new HelloSender());
     }
     private class ClickOnSendButtonListener implements ActionListener {
         @Override
@@ -29,6 +30,13 @@ public class Controller {
         @Override
         public void windowClosing(WindowEvent e) {
             model.sendGoodByeMessage();
+        }
+    }
+
+    private class HelloSender extends WindowAdapter{
+        @Override
+        public void windowActivated(WindowEvent e){
+            model.sendHelloMessage();
         }
     }
 }
