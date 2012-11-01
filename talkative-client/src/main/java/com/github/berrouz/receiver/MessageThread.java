@@ -27,7 +27,6 @@ public class MessageThread implements Runnable {
     @Override
     public void run() {
         BufferedReader bufferedReader;
-        System.out.println("MessageThread is col");
         try {
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String temp, result = "";

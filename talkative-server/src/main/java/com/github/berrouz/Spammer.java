@@ -3,6 +3,7 @@ package com.github.berrouz;
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -20,8 +21,18 @@ public class Spammer {
      * update all clients in currentClientList
      */
     public void sendToAll(List<Contact> currentContactList){
+        List<Contact> contactList = getCopy(currentContactList);
+
         for(Contact contact: currentContactList){
+            contactList.remove(contact);
             sender.sendMessage(new Message(new Gson().toJson(currentContactList), Message.MESSAGE_TYPES.CONTACT_LIST, contact, myContact));
         }
+    }
+    public List<Contact> getCopy(List<Contact> contactList){
+        List<Contact> list= new LinkedList<Contact>();
+        for(Contact contact: contactList){
+            list.add(contact);
+        }
+        return list;
     }
 }

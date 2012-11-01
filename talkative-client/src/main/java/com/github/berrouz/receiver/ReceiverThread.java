@@ -32,7 +32,6 @@ public class ReceiverThread implements Runnable{
             e.printStackTrace();
         }
         while(true){
-            System.out.println("I am listening");
             try {
                 Socket socket = serverSocket.accept();
                 new Thread(new MessageThread(socket, messageQueue)).start();

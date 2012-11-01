@@ -30,5 +30,13 @@ public class Handler {
                 break;
         }
     }
+
+    public List<Contact> getCurrentContactList() {
+        return currentContactList;
+    }
+
+    public void setCurrentContactList(List<Contact> currentContactList) {
+        this.currentContactList = currentContactList;
+    }
 }
 

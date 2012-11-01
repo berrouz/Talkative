@@ -35,13 +35,11 @@ public class MessageAnalyzer implements Runnable{
                 e.printStackTrace();
             }
             if ((message = messageQueue.getInput().poll()) != null) {
-                System.out.println(message);
                 switch (message.getType()) {
                     case CONTACT_LIST:
                         Type setType = new TypeToken<Queue<Contact>>() {
                         }.getType();
                         messageQueue.setContactList((Queue<Contact>) new Gson().fromJson(message.getData(), setType));
-                        System.out.println("  message queue is " + messageQueue.getContactList().size());
                         break;
                     case SMS:
                         messageQueue.getInputMessages().add(message);

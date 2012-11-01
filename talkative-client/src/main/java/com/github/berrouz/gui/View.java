@@ -63,5 +63,7 @@ public class View extends JFrame {
         add(status, BorderLayout.SOUTH);
     }
 
-
+    public void setTitle(String title){
+        super.setTitle(title);
+    }
 }

@@ -24,6 +24,7 @@ public class Model {
         this.myContact = myContact;
         new Thread(new SmsReader(messageQueue, view)).start();
         new Thread(new ContactsReader(messageQueue, view)).start();
+        view.setTitle(myContact.getFullName());
     }
 
     public void sendMessage(Message message){

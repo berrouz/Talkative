@@ -22,17 +22,17 @@ public class ContactsReader implements Runnable{
     public void run() {
         while(true){
             try {
-                Thread.sleep(500);
+                Thread.sleep(5600);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(messageQueue.contactListChanged()){
+            if(messageQueue.isContactListUpdated()){
+                messageQueue.resetContactListUpdated();
                 view.names.removeAllItems();
                 for(Contact c: messageQueue.getContactList()){
                     view.names.addItem(c);
                 }
             }
-            System.out.println(messageQueue.getContactList().size() + " size of contacts");
         }
     }
 }
