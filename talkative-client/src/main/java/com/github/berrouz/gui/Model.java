@@ -35,18 +35,20 @@ public class Model {
         // when client disconnects send "Goodbye" message
         // to Server
         Message goodByeMessage = new Message("", Message.MESSAGE_TYPES.REMOVE_CONTACT, Global.SERVER_CONTACT.myContact, myContact);
+        sendMessage(goodByeMessage);
     }
 
     public void sendSMS(String textToBeSent, Contact toWhom){
         Message message = new Message(textToBeSent, Message.MESSAGE_TYPES.SMS, toWhom, myContact);
         sendMessage(message);
-        logger.info("Client sends hello message to the server");
+        logger.info("Client sends sms message to the server");
     }
 
     public void sendHelloMessage(){
         Message message = new Message("Hello", Message.MESSAGE_TYPES.ADD_CONTACT, Global.SERVER_CONTACT.myContact, myContact);
         sendMessage(message);
         logger.info("Client sends hello message to the server");
+        System.out.println("Heko");
     }
 }
 

@@ -26,6 +26,11 @@ public class Client {
     public static void main(String[] args) {
         new Server().start();
         new Client("Sergey", "Shevchik", 9090);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         new Client("Dima", "Zelinskiy", 9091);
     }
 }
