@@ -24,6 +24,7 @@ public class Client {
     }
 
     public static void main(String[] args) {
+        new Server().start();
         new Client("Sergey", "Shevchik", 9090);
     }
 }

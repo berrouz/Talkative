@@ -21,6 +21,11 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
+        <dependency>
+            <artifactId>talkative-server</artifactId>
+            <groupId>com.github.berrouz</groupId>
+            <version>${project.parent.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
