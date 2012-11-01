@@ -1,63 +1,42 @@
 package com.github.berrouz.gui;
 
-
-import com.github.berrouz.ClientBase;
 import com.github.berrouz.Contact;
 import com.github.berrouz.Message;
+import com.github.berrouz.Global;
+import com.github.berrouz.MessageQueue;
 
-import java.awt.*;
-
+/**
+ * Created with IntelliJ IDEA.
+ * User: shevchik
+ * Date: 01.11.12
+ * Time: 11:35
+ * To change this template use File | Settings | File Templates.
+ */
 public class Model {
     private View view;
-    private ClientBase clientBase;
-    public Model(View view, ClientBase clientBase){
+    private Contact myContact;
+    private MessageQueue messageQueue;
+    public Model(MessageQueue messageQueue, View view, Contact myContact){
         this.view = view;
-        this.clientBase = clientBase;
-        new MessageThread().start();
-        new MessageShowerThread().start();
-    }
-    // todo make MessageThread started only if Receiver has a new message
-    private class MessageThread extends Thread{
-        public void run() {
-            while(true){
-                new ContactsThread().start();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        this.messageQueue = messageQueue;
+        this.myContact = myContact;
+        new Thread(new SmsReader(messageQueue, view)).start();
+        new Thread(new ContactsReader(messageQueue, view)).start();
     }
 
-    private class ContactsThread extends Thread{
-        public void run(){
-            if(view.names.getItemCount()!= clientBase.receiver.getCurrentContactList().size()){
-                view.names.removeAllItems();
-                for(Contact contact: clientBase.receiver.getCurrentContactList()){
-                    view.names.addItem(contact);
-                }
-            }
-        }
+    public void sendMessage(Message message){
+        messageQueue.getOutputMessages().add(message);
     }
 
-    private class MessageShowerThread extends Thread{
-        public void run(){
-            while(true){
-                if(clientBase.receiver.getMessages().size() !=0){
-                    Message messageText = clientBase.receiver.getMessages().poll();
-                    view.receivedMessages.append(messageText.getFromWhom().toString() +" :");
-                    view.receivedMessages.append(messageText.getData() + "\n");
-                    view.setPreferredSize(new Dimension(view.getSize().height+10, view.getSize().width));
-                    view.jScrollPaneReceivedMessages.getVerticalScrollBar().setValue(view.jScrollPaneReceivedMessages.getVerticalScrollBar().getMaximum());
-                    view.revalidate();
-                }
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    public void sendGoodByeMessage(){
+        // when client disconnects send "Goodbye" message
+        // to Server
+        Message goodByeMessage = new Message("", Message.MESSAGE_TYPES.REMOVE_CONTACT, Global.SERVER_CONTACT.myContact, myContact);
+    }
+
+    public void sendSMS(String textToBeSent, Contact toWhom){
+        Message message = new Message(textToBeSent, Message.MESSAGE_TYPES.SMS, toWhom, myContact);
+        sendMessage(message);
     }
 }
+
