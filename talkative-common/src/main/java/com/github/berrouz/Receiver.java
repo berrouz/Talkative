@@ -47,7 +47,7 @@ public class Receiver {
             receivedMessage = new Gson().fromJson(content.toString(), Message.class);
 
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.error("IO Exception in message", e);
         }
         finally {
             try {
