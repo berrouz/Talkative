@@ -16,8 +16,11 @@ import java.util.List;
  */
 public class Spammer {
     public Contact myContact = new Contact("Server", "server", "photo", "127.0.0.1", 7000);
-    private Sender sender = new Sender();
-    private Logger logger;
+    private MessageQueue messageQueue;
+    private Logger logger = Logger.getLogger(Spammer.class);
+    public Spammer(MessageQueue messageQueue){
+        this.messageQueue = messageQueue;
+    }
 
     /**
      * update all clients in currentClientList
@@ -28,7 +31,8 @@ public class Spammer {
         for(Contact contact: currentContactList){
             contactList = getCopy(currentContactList);
             contactList.remove(contact);
-            sender.sendMessage(new Message(new Gson().toJson(contactList), Message.MESSAGE_TYPES.CONTACT_LIST, contact, myContact));
+            messageQueue.getOutputMessages().add(new Message(new Gson().toJson(contactList), Message.MESSAGE_TYPES.CONTACT_LIST, contact, myContact));
+            logger.debug("Send updated contact list with "+ contactList.size() + " to "+ contact.toString());
         }
     }
 

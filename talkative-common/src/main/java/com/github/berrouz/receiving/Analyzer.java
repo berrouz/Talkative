@@ -5,6 +5,7 @@ import com.github.berrouz.Message;
 import com.github.berrouz.MessageQueue;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.apache.log4j.Logger;
 
 import java.lang.reflect.Type;
 import java.util.Queue;
@@ -20,20 +21,26 @@ public abstract class Analyzer implements Runnable{
 
     protected MessageQueue messageQueue;
 
+    private Logger logger = Logger.getLogger(this.getClass());
+
     protected Analyzer(MessageQueue messageQueue){
         this.messageQueue = messageQueue;
     }
 
     @Override
     public void run() {
-        Message message = null;
+        Message message;
         while(true){
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.error("Interrupted Thread sleep in "+ this.getClass(), e);
             }
-            analyze(message);
+            if((message = messageQueue.getInput().poll())!= null){
+                logger.debug("Input Queue is not empty");
+                analyze(message);
+                logger.debug("Message is to be analyzed in "+ this.getClass());
+            }
         }
     }
 

@@ -51,7 +51,7 @@ public class ReceiverThread implements Runnable{
                 Socket socket = serverSocket.accept();
                 socketReader.setSocket(socket);
                 new Thread(socketReader).start();
-                logger.debug("Server "+ ReceiverThread.class + " has accepted new client and started new Thread");
+                logger.debug("Server "+ ReceiverThread.class + " has accepted new client and started new socketReader Thread");
             } catch (IOException e) {
                 logger.error("IOException in "+ ReceiverThread.class + " instance " + this, e);
             }

@@ -1,6 +1,11 @@
 package com.github.berrouz;
 
-import com.github.berrouz.receiving.Receiver;
+import com.github.berrouz.receiver.ServerMessageAnalyzer;
+import com.github.berrouz.receiving.Analyzer;
+import com.github.berrouz.receiving.ReceiverThread;
+import com.github.berrouz.receiving.SocketReader;
+import com.github.berrouz.sending.Sender;
+import com.github.berrouz.sending.SenderThread;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,21 +15,26 @@ import com.github.berrouz.receiving.Receiver;
  * To change this template use File | Settings | File Templates.
  */
 public class Server {
-    private static Handler handler = new Handler();
-    private Receiver receiver = new Receiver(Global.SERVER_CONTACT.myContact.getIpAddress(), Global.SERVER_CONTACT.myContact.getPort());
+    private Transceiver transceiver;
 
     public void start(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-            while(true){
-                Message message;
-                if((message = receiver.receive())!= null){
-                    handler.handleMessage(message);
-                }
-            }
-            }
-        }).start();
+        // messageQueue assignment
+        MessageQueue queue = new MessageQueue();
+
+        // Sender
+        SenderThread senderThread = new SenderThread(queue, new Sender());
+
+        // Receiver
+        Analyzer messageAnalyzer = new ServerMessageAnalyzer(queue, new Spammer(queue));
+        SocketReader socketReader = new SocketReader(queue);
+        ReceiverThread receiverThread = new ReceiverThread(Global.SERVER_CONTACT.myContact, messageAnalyzer, socketReader);
+
+        // transceiver-receiver
+        this.transceiver = new Transceiver(queue);
+        this.transceiver.setReceiverThread(receiverThread);
+        this.transceiver.setSenderThread(senderThread);
+        this.transceiver.start();
+
     }
 
     public static void main(String[] args) {

@@ -48,7 +48,6 @@ public class Model {
         Message message = new Message("Hello", Message.MESSAGE_TYPES.ADD_CONTACT, Global.SERVER_CONTACT.myContact, myContact);
         sendMessage(message);
         logger.info("Client sends hello message to the server");
-        System.out.println("Heko");
     }
 }
 
