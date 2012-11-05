@@ -1,5 +1,7 @@
 package com.github.berrouz;
 
+import com.github.berrouz.receiving.Receiver;
+
 /**
  * Created with IntelliJ IDEA.
  * User: shevchik

@@ -1,5 +1,6 @@
-package com.github.berrouz;
+package com.github.berrouz.sending;
 
+import com.github.berrouz.Message;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;

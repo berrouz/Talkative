@@ -14,6 +14,11 @@ import javax.swing.*;
  * To change this template use File | Settings | File Templates.
  */
 public class GuiRunner {
+    /**
+     * Runs Swing GUI in separate Thread
+     * @param messageQueue
+     * @param myContact
+     */
     public GuiRunner(final MessageQueue messageQueue, final Contact myContact){
         SwingUtilities.invokeLater(new Runnable() {
             @Override

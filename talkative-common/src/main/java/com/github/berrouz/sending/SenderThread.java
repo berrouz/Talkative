@@ -1,7 +1,6 @@
-package com.github.berrouz.sender;
+package com.github.berrouz.sending;
 
 import com.github.berrouz.Message;
-import com.github.berrouz.Sender;
 import com.github.berrouz.MessageQueue;
 
 /**
@@ -14,9 +13,9 @@ import com.github.berrouz.MessageQueue;
 public class SenderThread implements Runnable{
     private Sender sender;
     private MessageQueue messageQueue;
-    public SenderThread(MessageQueue messageQueue){
+    public SenderThread(MessageQueue messageQueue, Sender sender){
         this.messageQueue = messageQueue;
-        this.sender = new Sender();
+        this.sender = sender;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.github.berrouz.receiver;
+package com.github.berrouz.receiving;
 
 import com.github.berrouz.Message;
 import com.github.berrouz.MessageQueue;
@@ -16,11 +16,10 @@ import java.net.Socket;
  * Time: 09:55
  * To change this template use File | Settings | File Templates.
  */
-public class MessageThread implements Runnable {
+public class SocketReader implements Runnable {
     private Socket socket;
     private MessageQueue messageQueue;
-    public MessageThread(Socket socket, MessageQueue messageQueue){
-        this.socket = socket;
+    public SocketReader(MessageQueue messageQueue){
         this.messageQueue = messageQueue;
     }
 
@@ -39,5 +38,9 @@ public class MessageThread implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setSocket(Socket socket) {
+        this.socket = socket;
     }
 }
