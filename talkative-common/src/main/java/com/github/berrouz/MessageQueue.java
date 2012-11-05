@@ -31,10 +31,6 @@ public class MessageQueue {
         return input;
     }
 
-    public void setInput(Queue<Message> input) {
-        this.input = input;
-    }
-
     public Queue<Contact> getContactList() {
         return contactList;
     }
@@ -48,16 +44,8 @@ public class MessageQueue {
         return inputMessages;
     }
 
-    public void setInputMessages(Queue<Message> inputMessages) {
-        this.inputMessages = inputMessages;
-    }
-
     public Queue<Message> getOutputMessages() {
         return outputMessages;
-    }
-
-    public void setOutputMessages(Queue<Message> outputMessages) {
-        this.outputMessages = outputMessages;
     }
 
     public boolean isContactListUpdated(){
