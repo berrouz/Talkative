@@ -15,11 +15,12 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class Spammer {
-    public Contact myContact = new Contact("Server", "server", "photo", "127.0.0.1", 7000);
+    public Contact serverContact;
     private MessageQueue messageQueue;
     private Logger logger = Logger.getLogger(Spammer.class);
-    public Spammer(MessageQueue messageQueue){
+    public Spammer(MessageQueue messageQueue, Contact serverContact){
         this.messageQueue = messageQueue;
+        this.serverContact = serverContact;
     }
 
     /**
@@ -31,7 +32,7 @@ public class Spammer {
         for(Contact contact: currentContactList){
             contactList = getCopy(currentContactList);
             contactList.remove(contact);
-            messageQueue.getOutputMessages().add(new Message(new Gson().toJson(contactList), Message.MESSAGE_TYPES.CONTACT_LIST, contact, myContact));
+            messageQueue.getOutputMessages().add(new Message(new Gson().toJson(contactList), Message.MESSAGE_TYPES.CONTACT_LIST, contact, serverContact));
             logger.debug("Send updated contact list with "+ contactList.size() + " to "+ contact.toString());
         }
     }

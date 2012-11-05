@@ -32,23 +32,12 @@ public class Client {
         ReceiverThread receiverThread = new ReceiverThread(myContact, messageAnalyzer, socketReader);
 
         // transceiver-receiver
-        this.transceiver = new Transceiver(queue);
+        this.transceiver = new Transceiver();
         this.transceiver.setReceiverThread(receiverThread);
         this.transceiver.setSenderThread(senderThread);
         this.transceiver.start();
 
         // starts GUI
         new GuiRunner(queue, myContact);
-    }
-
-    public static void main(String[] args) {
-        new Server().start();
-        new Client("Sergey", "Shevchik", 9090);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        new Client("Dima", "Zelinskiy", 9091);
     }
 }

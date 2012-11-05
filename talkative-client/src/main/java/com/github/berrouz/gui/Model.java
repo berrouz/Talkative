@@ -1,8 +1,8 @@
 package com.github.berrouz.gui;
 
 import com.github.berrouz.Contact;
-import com.github.berrouz.Message;
 import com.github.berrouz.Global;
+import com.github.berrouz.Message;
 import com.github.berrouz.MessageQueue;
 import org.apache.log4j.Logger;
 

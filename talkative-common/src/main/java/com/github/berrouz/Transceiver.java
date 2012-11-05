@@ -14,13 +14,8 @@ import com.github.berrouz.sending.SenderThread;
  */
 // class holds sender and receiver threads
 public class Transceiver {
-    private MessageQueue messageQueue;
     private ReceiverThread receiverThread;
     protected SenderThread senderThread;
-
-    public Transceiver(MessageQueue messageQueue){
-        this.messageQueue = messageQueue;
-    }
 
     public void start(){
         if(receiverThread != null && senderThread != null){
