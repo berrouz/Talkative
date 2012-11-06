@@ -1,19 +1,26 @@
 package com.github.berrouz;
 
 public class Contact{
+
     private String firstName;
+
     private String lastName;
+
     private String ipAddress;
+
     private volatile int hashCode;
+
     private int port;
 
     public Contact(){}
-    public Contact(String f, String l, String photo, String ipAddress, int port){
+
+    public Contact(String f, String l, String ipAddress, int port){
         this.firstName = f;
         this.lastName  = l;
         this.ipAddress = ipAddress;
         this.port = port;
     }
+
     public String toString(){
         return firstName+" "+lastName;
     }

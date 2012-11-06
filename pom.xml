@@ -22,6 +22,12 @@
         <mysql-connector-java.version>5.1.6</mysql-connector-java.version>
         <hibernate-core.version>4.1.6.Final</hibernate-core.version>
     </properties>
+    <repositories>
+        <repository>
+            <id>xuggle repo</id>
+            <url>http://xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -60,6 +66,11 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>r09</version>
+            </dependency>
+            <dependency>
+                <groupId>xuggle</groupId>
+                <artifactId>xuggle-xuggler</artifactId>
+                <version>5.2</version>
             </dependency>
 
         </dependencies>

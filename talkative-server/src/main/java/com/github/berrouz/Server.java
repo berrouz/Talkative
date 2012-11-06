@@ -43,7 +43,7 @@ public class Server {
     }
 
     public static void main(String[] args) {
-        Contact serverContact = new Contact("server", "server", "", "127.0.0.1", 7000);
+        Contact serverContact = new Contact("server", "server", "127.0.0.1", 7000);
         new Server(serverContact).start();
     }
 }

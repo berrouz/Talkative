@@ -1,7 +1,5 @@
 package com.github.berrouz;
 
-import com.github.berrouz.Contact;
-
 /**
  * Created with IntelliJ IDEA.
  * User: shevchik
@@ -14,6 +12,6 @@ public enum Global {
 
     public Contact myContact;
     Global(String firstName, String lastName, String url, String ipAddress, int port){
-        myContact = new Contact(firstName,lastName,url,ipAddress,port);
+        myContact = new Contact(firstName,lastName, ipAddress,port);
     }
 }

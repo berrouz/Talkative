@@ -24,7 +24,7 @@ public class Sender {
      */
     public void sendMessage(Message message){
         try {
-            Socket socket = new Socket(message.getToWhom().getIpAddress(), message.getToWhom().getPort());
+            Socket socket = new Socket(message.getRecipient().getIpAddress(), message.getRecipient().getPort());
             OutputStreamWriter outputBuffer = new OutputStreamWriter(socket.getOutputStream());
             PrintWriter printWriter = new PrintWriter(outputBuffer);
             printWriter.print(message.toJson());

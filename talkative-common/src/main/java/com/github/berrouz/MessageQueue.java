@@ -1,24 +1,29 @@
 package com.github.berrouz;
 
-import com.github.berrouz.Contact;
-import com.github.berrouz.Message;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Created with IntelliJ IDEA.
- * User: shevchik
- * Date: 01.11.12
- * Time: 09:49
- * To change this template use File | Settings | File Templates.
+ * Message Queue is queue where all messages and contacts are saved
  */
 public class MessageQueue {
+
+    // general input queue for every Message received
     private Queue<Message> input;
+
+    // queue where saved contacts of all active users of chat program
     private Queue<Contact> contactList;
+
+    // queue where saved only messages to be displayed in chat program, actual text messages from client to client
     private Queue<Message> inputMessages;
+
+    // queue where saved messages which are to be sent to clients
     private Queue<Message> outputMessages;
+
+    // boolean value, defines if contactList has been updated with new contact list
     private boolean contactListUpdated;
+
+
     public MessageQueue(){
         this.input          = new LinkedList<Message>();
         this.contactList    = new LinkedList<Contact>();

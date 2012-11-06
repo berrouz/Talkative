@@ -18,7 +18,7 @@ public class Client {
     private Contact myContact;
     private Transceiver transceiver;
     public Client(String firstName, String lastName, int port){
-        this.myContact = new Contact(firstName,lastName,"", "127.0.0.1", port);
+        this.myContact = new Contact(firstName,lastName, "127.0.0.1", port);
 
         // messageQueue assignment
         MessageQueue queue = new MessageQueue();
