@@ -1,5 +1,6 @@
 package com.github.berrouz;
 
+import com.github.berrouz.depot.MessageQueue;
 import com.github.berrouz.gui.Controller;
 import com.github.berrouz.gui.Model;
 import com.github.berrouz.gui.View;

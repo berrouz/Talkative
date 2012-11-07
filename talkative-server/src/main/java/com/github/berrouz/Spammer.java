@@ -1,6 +1,6 @@
 package com.github.berrouz;
 
-import com.github.berrouz.sending.Sender;
+import com.github.berrouz.depot.MessageQueue;
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 

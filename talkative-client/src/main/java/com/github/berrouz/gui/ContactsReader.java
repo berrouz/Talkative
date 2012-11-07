@@ -1,7 +1,7 @@
 package com.github.berrouz.gui;
 
 import com.github.berrouz.Contact;
-import com.github.berrouz.MessageQueue;
+import com.github.berrouz.depot.MessageQueue;
 
 /**
  * Created with IntelliJ IDEA.

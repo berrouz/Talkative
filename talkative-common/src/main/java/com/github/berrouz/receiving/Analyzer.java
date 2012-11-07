@@ -1,14 +1,8 @@
 package com.github.berrouz.receiving;
 
-import com.github.berrouz.Contact;
 import com.github.berrouz.Message;
-import com.github.berrouz.MessageQueue;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.github.berrouz.depot.MessageQueue;
 import org.apache.log4j.Logger;
-
-import java.lang.reflect.Type;
-import java.util.Queue;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,11 +25,6 @@ public abstract class Analyzer implements Runnable{
     public void run() {
         Message message;
         while(true){
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                logger.error("Interrupted Thread sleep in "+ this.getClass(), e);
-            }
             if((message = messageQueue.getInput().poll())!= null){
                 logger.debug("Input Queue is not empty");
                 analyze(message);

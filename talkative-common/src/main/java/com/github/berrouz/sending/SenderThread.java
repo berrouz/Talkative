@@ -1,7 +1,7 @@
 package com.github.berrouz.sending;
 
 import com.github.berrouz.Message;
-import com.github.berrouz.MessageQueue;
+import com.github.berrouz.depot.MessageQueue;
 
 /**
  * Created with IntelliJ IDEA.

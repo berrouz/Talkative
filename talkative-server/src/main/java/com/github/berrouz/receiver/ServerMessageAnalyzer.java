@@ -2,7 +2,7 @@ package com.github.berrouz.receiver;
 
 import com.github.berrouz.Contact;
 import com.github.berrouz.Message;
-import com.github.berrouz.MessageQueue;
+import com.github.berrouz.depot.MessageQueue;
 import com.github.berrouz.Spammer;
 import com.github.berrouz.receiving.Analyzer;
 

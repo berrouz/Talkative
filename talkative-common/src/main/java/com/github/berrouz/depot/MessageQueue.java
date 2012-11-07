@@ -1,4 +1,7 @@
-package com.github.berrouz;
+package com.github.berrouz.depot;
+
+import com.github.berrouz.Contact;
+import com.github.berrouz.Message;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -9,47 +12,47 @@ import java.util.Queue;
 public class MessageQueue {
 
     // general input queue for every Message received
-    private Queue<Message> input;
+    private InputQueue<Message> input;
 
     // queue where saved contacts of all active users of chat program
-    private Queue<Contact> contactList;
+    private LinkedList<Contact> contactList;
 
     // queue where saved only messages to be displayed in chat program, actual text messages from client to client
-    private Queue<Message> inputMessages;
+    private InputQueue<Message> inputMessages;
 
     // queue where saved messages which are to be sent to clients
-    private Queue<Message> outputMessages;
+    private InputQueue<Message> outputMessages;
 
     // boolean value, defines if contactList has been updated with new contact list
     private boolean contactListUpdated;
 
 
     public MessageQueue(){
-        this.input          = new LinkedList<Message>();
+        this.input          = new InputQueue<Message>();
         this.contactList    = new LinkedList<Contact>();
-        this.inputMessages  = new LinkedList<Message>();
-        this.outputMessages = new LinkedList<Message>();
+        this.inputMessages  = new InputQueue<Message>();
+        this.outputMessages = new InputQueue<Message>();
         this.contactListUpdated = false;
     }
 
-    public Queue<Message> getInput() {
+    public InputQueue<Message> getInput() {
         return input;
     }
 
-    public Queue<Contact> getContactList() {
+    public LinkedList<Contact> getContactList() {
         return contactList;
     }
 
-    public void setContactList(Queue<Contact> contactList) {
+    public void setContactList(LinkedList<Contact> contactList) {
         this.contactList = contactList;
         this.contactListUpdated = true;
     }
 
-    public Queue<Message> getInputMessages() {
+    public InputQueue<Message> getInputMessages() {
         return inputMessages;
     }
 
-    public Queue<Message> getOutputMessages() {
+    public InputQueue<Message> getOutputMessages() {
         return outputMessages;
     }
 

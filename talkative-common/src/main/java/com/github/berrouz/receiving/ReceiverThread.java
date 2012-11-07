@@ -1,7 +1,6 @@
 package com.github.berrouz.receiving;
 
 import com.github.berrouz.Contact;
-import com.github.berrouz.MessageQueue;
 import com.github.berrouz.errors.ArgumentError;
 import org.apache.log4j.Logger;
 

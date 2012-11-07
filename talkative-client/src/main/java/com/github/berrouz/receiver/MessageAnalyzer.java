@@ -2,13 +2,14 @@ package com.github.berrouz.receiver;
 
 import com.github.berrouz.Contact;
 import com.github.berrouz.Message;
-import com.github.berrouz.MessageQueue;
+import com.github.berrouz.depot.MessageQueue;
 import com.github.berrouz.receiving.Analyzer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.apache.log4j.Logger;
 
 import java.lang.reflect.Type;
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class MessageAnalyzer extends Analyzer {
@@ -25,7 +26,7 @@ public class MessageAnalyzer extends Analyzer {
             case CONTACT_LIST:
                 Type setType = new TypeToken<Queue<Contact>>() {
                 }.getType();
-                messageQueue.setContactList((Queue<Contact>) new Gson().fromJson(message.getData(), setType));
+                messageQueue.setContactList((LinkedList<Contact>) new Gson().fromJson(message.getData(), setType));
                 logger.debug("Contact list in "+ this +" has been update. There are "+ messageQueue.getContactList().size() + " contacts");
                 break;
             case SMS:

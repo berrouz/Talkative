@@ -1,5 +1,6 @@
 package com.github.berrouz;
 
+import com.github.berrouz.depot.MessageQueue;
 import com.github.berrouz.receiver.MessageAnalyzer;
 import com.github.berrouz.receiving.Analyzer;
 import com.github.berrouz.receiving.SocketReader;

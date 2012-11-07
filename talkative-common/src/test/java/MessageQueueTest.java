@@ -1,5 +1,6 @@
 import com.github.berrouz.Contact;
-import com.github.berrouz.MessageQueue;
+import com.github.berrouz.depot.InputQueue;
+import com.github.berrouz.depot.MessageQueue;
 import org.junit.Before;
 import org.junit.Test;
 
