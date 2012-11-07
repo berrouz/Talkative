@@ -3,7 +3,7 @@ package com.github.berrouz.gui;
 import com.github.berrouz.Contact;
 import com.github.berrouz.Global;
 import com.github.berrouz.Message;
-import com.github.berrouz.depot.MessageQueue;
+import com.github.berrouz.depot.MessageDepot;
 import org.apache.log4j.Logger;
 
 /**
@@ -16,9 +16,9 @@ import org.apache.log4j.Logger;
 public class Model {
     private View view;
     private Contact myContact;
-    private MessageQueue messageQueue;
+    private MessageDepot messageQueue;
     private Logger logger = Logger.getLogger(Model.class);
-    public Model(MessageQueue messageQueue, View view, Contact myContact){
+    public Model(MessageDepot messageQueue, View view, Contact myContact){
         this.view = view;
         this.messageQueue = messageQueue;
         this.myContact = myContact;

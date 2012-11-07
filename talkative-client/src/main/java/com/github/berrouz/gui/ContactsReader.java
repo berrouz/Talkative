@@ -1,7 +1,7 @@
 package com.github.berrouz.gui;
 
 import com.github.berrouz.Contact;
-import com.github.berrouz.depot.MessageQueue;
+import com.github.berrouz.depot.MessageDepot;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,8 +12,8 @@ import com.github.berrouz.depot.MessageQueue;
  */
 public class ContactsReader implements Runnable{
     private View view;
-    private MessageQueue messageQueue;
-    public ContactsReader(MessageQueue messageQueue, View view){
+    private MessageDepot messageQueue;
+    public ContactsReader(MessageDepot messageQueue, View view){
         this.messageQueue = messageQueue;
         this.view = view;
     }

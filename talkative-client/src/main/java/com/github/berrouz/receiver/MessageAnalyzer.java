@@ -2,7 +2,7 @@ package com.github.berrouz.receiver;
 
 import com.github.berrouz.Contact;
 import com.github.berrouz.Message;
-import com.github.berrouz.depot.MessageQueue;
+import com.github.berrouz.depot.MessageDepot;
 import com.github.berrouz.receiving.Analyzer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,7 +16,7 @@ public class MessageAnalyzer extends Analyzer {
 
     private Logger logger = Logger.getLogger(MessageAnalyzer.class);
 
-    public MessageAnalyzer(MessageQueue messageQueue){
+    public MessageAnalyzer(MessageDepot messageQueue){
         super(messageQueue);
     }
 
@@ -30,7 +30,7 @@ public class MessageAnalyzer extends Analyzer {
                 logger.debug("Contact list in "+ this +" has been update. There are "+ messageQueue.getContactList().size() + " contacts");
                 break;
             case SMS:
-                messageQueue.getInputMessages().add(message);
+                messageQueue.getInputSMS().add(message);
                 break;
         }
     }

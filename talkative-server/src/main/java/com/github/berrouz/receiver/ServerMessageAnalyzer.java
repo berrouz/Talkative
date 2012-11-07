@@ -2,7 +2,7 @@ package com.github.berrouz.receiver;
 
 import com.github.berrouz.Contact;
 import com.github.berrouz.Message;
-import com.github.berrouz.depot.MessageQueue;
+import com.github.berrouz.depot.MessageDepot;
 import com.github.berrouz.Spammer;
 import com.github.berrouz.receiving.Analyzer;
 
@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class ServerMessageAnalyzer extends Analyzer {
     private Spammer spammer;
-    public ServerMessageAnalyzer(MessageQueue messageQueue, Spammer spammer){
+    public ServerMessageAnalyzer(MessageDepot messageQueue, Spammer spammer){
         super(messageQueue);
         this.spammer = spammer;
     }

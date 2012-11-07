@@ -1,6 +1,6 @@
 package com.github.berrouz;
 
-import com.github.berrouz.depot.MessageQueue;
+import com.github.berrouz.depot.MessageDepot;
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 
@@ -16,9 +16,9 @@ import java.util.List;
  */
 public class Spammer {
     public Contact serverContact;
-    private MessageQueue messageQueue;
+    private MessageDepot messageQueue;
     private Logger logger = Logger.getLogger(Spammer.class);
-    public Spammer(MessageQueue messageQueue, Contact serverContact){
+    public Spammer(MessageDepot messageQueue, Contact serverContact){
         this.messageQueue = messageQueue;
         this.serverContact = serverContact;
     }

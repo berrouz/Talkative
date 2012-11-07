@@ -1,7 +1,7 @@
 package com.github.berrouz.receiving;
 
 import com.github.berrouz.Message;
-import com.github.berrouz.depot.MessageQueue;
+import com.github.berrouz.depot.MessageDepot;
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 
@@ -20,11 +20,11 @@ import java.net.Socket;
 public class SocketReader implements Runnable {
     private Socket socket;
 
-    private MessageQueue messageQueue;
+    private MessageDepot messageQueue;
 
     private Logger logger = Logger.getLogger(SocketReader.class);
 
-    public SocketReader(MessageQueue messageQueue){
+    public SocketReader(MessageDepot messageQueue){
         this.messageQueue = messageQueue;
     }
 
@@ -38,7 +38,7 @@ public class SocketReader implements Runnable {
                 result = result.concat(temp);
             }
             Message message = new Gson().fromJson(result, Message.class);
-            messageQueue.getInput().add(message);
+            messageQueue.getInputMessages().add(message);
             logger.debug("new message received from "+ message.getFromWhom() +" and has been added to input queue of class"+ this);
         } catch (IOException e) {
             e.printStackTrace();

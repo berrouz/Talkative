@@ -1,6 +1,5 @@
 import com.github.berrouz.Contact;
-import com.github.berrouz.depot.InputQueue;
-import com.github.berrouz.depot.MessageQueue;
+import com.github.berrouz.depot.MessageDepot;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,11 +17,11 @@ import static junit.framework.Assert.assertTrue;
  */
 public class MessageQueueTest {
 
-    private MessageQueue messageQueue;
+    private MessageDepot messageQueue;
 
     @Before
     public void setMessageQueue(){
-        messageQueue = new MessageQueue();
+        messageQueue = new MessageDepot();
     }
     @Test
     public void testIsContactListUpdated(){

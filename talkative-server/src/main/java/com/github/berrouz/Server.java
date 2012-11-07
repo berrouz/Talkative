@@ -1,6 +1,6 @@
 package com.github.berrouz;
 
-import com.github.berrouz.depot.MessageQueue;
+import com.github.berrouz.depot.MessageDepot;
 import com.github.berrouz.receiver.ServerMessageAnalyzer;
 import com.github.berrouz.receiving.Analyzer;
 import com.github.berrouz.receiving.ReceiverThread;
@@ -25,13 +25,13 @@ public class Server {
     }
     public void start(){
         // messageQueue assignment
-        MessageQueue queue = new MessageQueue();
+        MessageDepot queue = new MessageDepot();
 
         // Sender
         SenderThread senderThread = new SenderThread(queue, new Sender());
 
         // Receiver
-        Analyzer messageAnalyzer = new ServerMessageAnalyzer(queue, new Spammer(queue, serverContact));
+        Analyzer messageAnalyzer = new ServerMessageAnalyzer(queue, new com.github.berrouz.Spammer(queue, serverContact));
         SocketReader socketReader = new SocketReader(queue);
         ReceiverThread receiverThread = new ReceiverThread(serverContact, messageAnalyzer, socketReader);
 

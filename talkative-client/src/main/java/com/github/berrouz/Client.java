@@ -1,10 +1,10 @@
 package com.github.berrouz;
 
-import com.github.berrouz.depot.MessageQueue;
+import com.github.berrouz.depot.MessageDepot;
 import com.github.berrouz.receiver.MessageAnalyzer;
 import com.github.berrouz.receiving.Analyzer;
-import com.github.berrouz.receiving.SocketReader;
 import com.github.berrouz.receiving.ReceiverThread;
+import com.github.berrouz.receiving.SocketReader;
 import com.github.berrouz.sending.Sender;
 import com.github.berrouz.sending.SenderThread;
 
@@ -22,7 +22,7 @@ public class Client {
         this.myContact = new Contact(firstName,lastName, "127.0.0.1", port);
 
         // messageQueue assignment
-        MessageQueue queue = new MessageQueue();
+        MessageDepot queue = new MessageDepot();
 
         // Sender
         SenderThread senderThread = new SenderThread(queue, new Sender());

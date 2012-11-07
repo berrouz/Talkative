@@ -2,18 +2,13 @@ package com.github.berrouz.sending;
 
 import com.github.berrouz.Message;
 import org.apache.log4j.Logger;
-
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
- * Created with IntelliJ IDEA.
- * User: shevchik
- * Date: 29.10.12
- * Time: 12:00
- * To change this template use File | Settings | File Templates.
+ * Sender class is to send a message to client
  */
 public class Sender {
     private Logger logger = Logger.getLogger(Sender.class);

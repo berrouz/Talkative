@@ -42,7 +42,7 @@ public class InputQueue<E> {
      * polling input queue
      * If queue if empty - thread starts to sleep in order to allow
      * other thread to add an element to a queue. When element is added to a queue,
-     * waited Thread is notified and proceed to work.
+     * waited Thread is notified and proceeds to work.
      * @return
      */
     public E poll(){

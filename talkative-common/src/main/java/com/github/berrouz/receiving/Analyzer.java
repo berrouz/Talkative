@@ -1,31 +1,34 @@
 package com.github.berrouz.receiving;
 
 import com.github.berrouz.Message;
-import com.github.berrouz.depot.MessageQueue;
+import com.github.berrouz.depot.MessageDepot;
 import org.apache.log4j.Logger;
 
 /**
- * Created with IntelliJ IDEA.
- * User: shevchik
- * Date: 05.11.12
- * Time: 07:20
- * To change this template use File | Settings | File Templates.
+ *  Abstract Analyzer defines analyze method which takes a message from input queue and puts it
+ *  into MessageQueue(SMS queue) or ContactsQueue
  */
 public abstract class Analyzer implements Runnable{
 
-    protected MessageQueue messageQueue;
+    protected MessageDepot messageQueue;
 
     private Logger logger = Logger.getLogger(this.getClass());
 
-    protected Analyzer(MessageQueue messageQueue){
+    protected Analyzer(MessageDepot messageQueue){
         this.messageQueue = messageQueue;
     }
 
+
+    /**
+     * run method encompasses activity of sending the message from
+     * input queue to analyze method of concrete Analyzer,
+     * which after processing a message adds  message to SMS queue of Contacts queue
+     */
     @Override
     public void run() {
         Message message;
         while(true){
-            if((message = messageQueue.getInput().poll())!= null){
+            if((message = messageQueue.getInputMessages().poll())!= null){
                 logger.debug("Input Queue is not empty");
                 analyze(message);
                 logger.debug("Message is to be analyzed in "+ this.getClass());

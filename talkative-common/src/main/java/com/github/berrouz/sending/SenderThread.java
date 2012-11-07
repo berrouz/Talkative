@@ -1,19 +1,15 @@
 package com.github.berrouz.sending;
 
 import com.github.berrouz.Message;
-import com.github.berrouz.depot.MessageQueue;
+import com.github.berrouz.depot.MessageDepot;
 
 /**
- * Created with IntelliJ IDEA.
- * User: shevchik
- * Date: 01.11.12
- * Time: 11:04
- * To change this template use File | Settings | File Templates.
+ * Sender Thread is responsible for sending messages from OutputQueue of MessageDepot
  */
 public class SenderThread implements Runnable{
     private Sender sender;
-    private MessageQueue messageQueue;
-    public SenderThread(MessageQueue messageQueue, Sender sender){
+    private MessageDepot messageQueue;
+    public SenderThread(MessageDepot messageQueue, Sender sender){
         this.messageQueue = messageQueue;
         this.sender = sender;
     }
