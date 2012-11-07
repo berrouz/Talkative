@@ -2,37 +2,39 @@ package com.github.berrouz.gui;
 
 import com.github.berrouz.Contact;
 import com.github.berrouz.depot.MessageDepot;
+import org.apache.log4j.Logger;
+import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: shevchik
- * Date: 01.11.12
- * Time: 11:46
- * To change this template use File | Settings | File Templates.
+ * Reads contacts from MessageDepot and shows them in GUI
  */
 public class ContactsReader implements Runnable{
+
     private View view;
+
+    // Depot of all messages and contact for Chat application
     private MessageDepot messageQueue;
+
+    private Logger logger = Logger.getLogger(ContactsReader.class);
+
     public ContactsReader(MessageDepot messageQueue, View view){
         this.messageQueue = messageQueue;
         this.view = view;
     }
 
+    /**
+     * If Contact list was updated, then it removes all contacts from GUI and
+     * updates JComboBox with a new received from Server contact list
+     */
     @Override
     public void run() {
         while(true){
-            try {
-                Thread.sleep(5600);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            List<Contact> contactList = messageQueue.getContactList().getContactList();
+            view.names.removeAllItems();
+            for(Contact c: contactList){
+                view.names.addItem(c);
             }
-            if(messageQueue.isContactListUpdated()){
-                messageQueue.resetContactListUpdated();
-                view.names.removeAllItems();
-                for(Contact c: messageQueue.getContactList()){
-                    view.names.addItem(c);
-                }
-            }
+            logger.debug("Contact List is updated by "+ this.getClass());
         }
     }
 }

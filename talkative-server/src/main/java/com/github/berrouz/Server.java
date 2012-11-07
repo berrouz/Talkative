@@ -8,12 +8,9 @@ import com.github.berrouz.receiving.SocketReader;
 import com.github.berrouz.sending.Sender;
 import com.github.berrouz.sending.SenderThread;
 
+
 /**
- * Created with IntelliJ IDEA.
- * User: shevchik
- * Date: 29.10.12
- * Time: 13:44
- * To change this template use File | Settings | File Templates.
+ * Encapsulates all classes for Server side of Chat application
  */
 public class Server {
     private Transceiver transceiver;
@@ -31,7 +28,7 @@ public class Server {
         SenderThread senderThread = new SenderThread(queue, new Sender());
 
         // Receiver
-        Analyzer messageAnalyzer = new ServerMessageAnalyzer(queue, new com.github.berrouz.Spammer(queue, serverContact));
+        Analyzer messageAnalyzer = new ServerMessageAnalyzer(queue, new Spammer(queue, serverContact));
         SocketReader socketReader = new SocketReader(queue);
         ReceiverThread receiverThread = new ReceiverThread(serverContact, messageAnalyzer, socketReader);
 

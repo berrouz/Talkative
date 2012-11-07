@@ -1,4 +1,5 @@
 import com.github.berrouz.Contact;
+import com.github.berrouz.depot.ContactsList;
 import com.github.berrouz.depot.MessageDepot;
 import org.junit.Before;
 import org.junit.Test;

@@ -9,15 +9,14 @@ import com.github.berrouz.sending.Sender;
 import com.github.berrouz.sending.SenderThread;
 
 /**
- * Created with IntelliJ IDEA.
- * User: shevchik
- * Date: 01.11.12
- * Time: 09:40
- * To change this template use File | Settings | File Templates.
+ * Client encompasses all the classes required for Client side of Chat application
  */
 public class Client {
+
     private Contact myContact;
+
     private Transceiver transceiver;
+
     public Client(String firstName, String lastName, int port){
         this.myContact = new Contact(firstName,lastName, "127.0.0.1", port);
 

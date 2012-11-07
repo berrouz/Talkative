@@ -4,7 +4,10 @@ import com.github.berrouz.Message;
 import com.github.berrouz.depot.MessageDepot;
 import java.awt.*;
 
-
+/**
+ * SmsReader Thread read SMS messages from MessageDepot
+ * and shows them in GUI
+ */
 public class SmsReader implements Runnable{
     private MessageDepot messageQueue;
     private View view;
@@ -13,22 +16,20 @@ public class SmsReader implements Runnable{
         this.view = view;
     }
 
+    /**
+     * If Depot holds at least one new message, this threads gets notified
+     * and shows a new message in GUI
+     */
     @Override
     public void run() {
         Message message;
         while(true){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if((message = messageQueue.getInputMessages().poll())!= null){
-                view.receivedMessages.append(message.getFromWhom().toString() +" :");
-                view.receivedMessages.append(message.getData() + "\n");
-                view.setPreferredSize(new Dimension(view.getSize().height+10, view.getSize().width));
-                view.jScrollPaneReceivedMessages.getVerticalScrollBar().setValue(view.jScrollPaneReceivedMessages.getVerticalScrollBar().getMaximum());
-                view.revalidate();
-            }
+            message = messageQueue.getInputSMS().poll() ;
+            view.receivedMessages.append(message.getFromWhom().toString() +" :");
+            view.receivedMessages.append(message.getData() + "\n");
+            view.setPreferredSize(new Dimension(view.getSize().height+10, view.getSize().width));
+            view.jScrollPaneReceivedMessages.getVerticalScrollBar().setValue(view.jScrollPaneReceivedMessages.getVerticalScrollBar().getMaximum());
+            view.revalidate();
         }
     }
 }

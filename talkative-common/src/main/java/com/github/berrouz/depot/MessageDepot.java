@@ -2,56 +2,57 @@ package com.github.berrouz.depot;
 
 import com.github.berrouz.Contact;
 import com.github.berrouz.Message;
-
-import java.util.LinkedList;
+import org.apache.log4j.Logger;
+import java.util.List;
 
 /**
- * Message Queue is queue where all messages and contacts are saved
+ * Message Depot is class where all messages and contacts are saved
  */
 public class MessageDepot {
 
     // general inputMessages queue for every Message received
-    private InputQueue<Message> inputMessages;
-
-    // queue where saved contacts of all active users of chat program
-    private LinkedList<Contact> contactList;
-
-    // queue where saved only SMS messages to be displayed in chat program, actual text messages from client to client
-    private InputQueue<Message> inputSMS;
+    private MessageQueue<Message> inputMessages;
 
     // queue where saved messages which are to be sent to clients
-    private InputQueue<Message> outputMessages;
+    private MessageQueue<Message> outputMessages;
+
+    // queue where saved contacts of all active users of chat program
+    private ContactsList<Contact> contactList;
+
+    // queue where saved only SMS messages to be displayed in chat program, actual text messages from client to client
+    private MessageQueue<Message> inputSMS;
 
     // boolean value, defines if contactList has been updated with new contact list
     private boolean contactListUpdated;
 
+    // logger
+    private Logger logger = Logger.getLogger(MessageDepot.class);
 
     public MessageDepot(){
-        this.inputMessages = new InputQueue<Message>();
-        this.outputMessages = new InputQueue<Message>();
-        this.contactList    = new LinkedList<Contact>();
-        this.inputSMS       = new InputQueue<Message>();
+        this.inputMessages = new MessageQueue<Message>();
+        this.outputMessages = new MessageQueue<Message>();
+        this.contactList    = new ContactsList<Contact>();
+        this.inputSMS       = new MessageQueue<Message>();
         this.contactListUpdated = false;
     }
 
-    public InputQueue<Message> getInputMessages() {
+    public MessageQueue<Message> getInputMessages() {
         return inputMessages;
     }
 
-    public LinkedList<Contact> getContactList() {
-        return contactList;
+    public ContactsList<Contact> getContactList() {
+        return this.contactList;
     }
 
-    public void setContactList(LinkedList<Contact> contactList) {
-        this.contactList = contactList;
-        this.contactListUpdated = true;
+    public void setContactList(List<Contact> contacts) {
+        this.contactList.setContactList(contacts);
     }
 
-    public InputQueue<Message> getInputSMS() {
+    public MessageQueue<Message> getInputSMS() {
         return inputSMS;
     }
 
-    public InputQueue<Message> getOutputMessages() {
+    public MessageQueue<Message> getOutputMessages() {
         return outputMessages;
     }
 

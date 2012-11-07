@@ -1,5 +1,9 @@
 package com.github.berrouz;
 
+/**
+ * Contact class presents the information about a client for
+ * communication via network, including port and ip address of client
+ */
 public class Contact{
 
     private String firstName;

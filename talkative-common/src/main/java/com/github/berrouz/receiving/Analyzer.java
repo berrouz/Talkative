@@ -18,7 +18,6 @@ public abstract class Analyzer implements Runnable{
         this.messageQueue = messageQueue;
     }
 
-
     /**
      * run method encompasses activity of sending the message from
      * input queue to analyze method of concrete Analyzer,
@@ -28,11 +27,11 @@ public abstract class Analyzer implements Runnable{
     public void run() {
         Message message;
         while(true){
-            if((message = messageQueue.getInputMessages().poll())!= null){
+
                 logger.debug("Input Queue is not empty");
-                analyze(message);
+                analyze(messageQueue.getInputMessages().poll());
                 logger.debug("Message is to be analyzed in "+ this.getClass());
-            }
+
         }
     }
 

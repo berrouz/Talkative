@@ -4,18 +4,13 @@ import com.github.berrouz.Message;
 import com.github.berrouz.depot.MessageDepot;
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
 /**
- * Created with IntelliJ IDEA.
- * User: shevchik
- * Date: 01.11.12
- * Time: 09:55
- * To change this template use File | Settings | File Templates.
+ * SocketReader reads from accepted socket and saves to MessageDepot inputMessages queue
  */
 public class SocketReader implements Runnable {
     private Socket socket;
@@ -28,6 +23,10 @@ public class SocketReader implements Runnable {
         this.messageQueue = messageQueue;
     }
 
+    /**
+     * reads from BufferedReader, concatenates text,
+     * transforms from JSON to Message object and add to inputMessage queue
+     */
     @Override
     public void run() {
         BufferedReader bufferedReader;
@@ -47,9 +46,5 @@ public class SocketReader implements Runnable {
 
     public void setSocket(Socket socket) {
         this.socket = socket;
-    }
-
-    public Socket getSocket() {
-        return socket;
     }
 }

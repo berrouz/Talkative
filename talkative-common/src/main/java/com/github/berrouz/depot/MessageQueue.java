@@ -1,28 +1,22 @@
 package com.github.berrouz.depot;
 
 import org.apache.log4j.Logger;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Created with IntelliJ IDEA.
- * User: shevchik
- * Date: 07.11.12
- * Time: 07:19
- * To change this template use File | Settings | File Templates.
+ *  Collection for holding messages
+ * @param <E>
  */
-public class InputQueue<E> {
-
+public class MessageQueue<E> {
     // input queue
     private final Queue<E> queue;
 
-    private Logger logger = Logger.getLogger(InputQueue.class);
+    private Logger logger = Logger.getLogger(MessageQueue.class);
 
-    public InputQueue(){
+    public MessageQueue(){
         this.queue = new LinkedList<E>();
     }
-
 
     /**
      * Adding an element to a queue and awakes polling Thread,
@@ -36,7 +30,6 @@ public class InputQueue<E> {
             return queue.add(e);
         }
     }
-
 
     /**
      * polling input queue

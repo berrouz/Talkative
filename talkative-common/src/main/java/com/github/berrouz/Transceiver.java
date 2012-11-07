@@ -2,16 +2,8 @@ package com.github.berrouz;
 
 import com.github.berrouz.errors.ArgumentError;
 import com.github.berrouz.receiving.ReceiverThread;
-import com.github.berrouz.sending.Sender;
 import com.github.berrouz.sending.SenderThread;
 
-/**
- * Created with IntelliJ IDEA.
- * User: shevchik
- * Date: 05.11.12
- * Time: 06:39
- * To change this template use File | Settings | File Templates.
- */
 // class holds sender and receiver threads
 public class Transceiver {
     private ReceiverThread receiverThread;
