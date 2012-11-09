@@ -79,4 +79,8 @@ public class ContactsList<E> implements Iterable<E>{
     public Iterator<E> iterator() {
         return this.contactList.iterator();
     }
+
+    public boolean isChangedContactList() {
+        return changedContactList;
+    }
 }

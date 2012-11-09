@@ -22,9 +22,6 @@ public class MessageDepot {
     // queue where saved only SMS messages to be displayed in chat program, actual text messages from client to client
     private MessageQueue<Message> inputSMS;
 
-    // boolean value, defines if contactList has been updated with new contact list
-    private boolean contactListUpdated;
-
     // logger
     private Logger logger = Logger.getLogger(MessageDepot.class);
 
@@ -33,7 +30,6 @@ public class MessageDepot {
         this.outputMessages = new MessageQueue<Message>();
         this.contactList    = new ContactsList<Contact>();
         this.inputSMS       = new MessageQueue<Message>();
-        this.contactListUpdated = false;
     }
 
     public MessageQueue<Message> getInputMessages() {
@@ -54,13 +50,5 @@ public class MessageDepot {
 
     public MessageQueue<Message> getOutputMessages() {
         return outputMessages;
-    }
-
-    public boolean isContactListUpdated(){
-        return contactListUpdated;
-    }
-
-    public void resetContactListUpdated(){
-        this.contactListUpdated = false;
     }
 }
