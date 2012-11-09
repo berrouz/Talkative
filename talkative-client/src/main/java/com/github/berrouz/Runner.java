@@ -1,5 +1,7 @@
 package com.github.berrouz;
 
+import com.github.berrouz.server.Server;
+
 /**
  * Created with IntelliJ IDEA.
  * User: shevchik
@@ -9,7 +11,7 @@ package com.github.berrouz;
  */
 public class Runner {
     public static void main(String[] args) {
-        new Server(new Contact("server", "server", "127.0.0.1", 7000)).start();
+        new Server().start();
         new Client("Sergey", "Shevchik", 9090);
         try {
             Thread.sleep(1000);
