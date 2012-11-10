@@ -40,7 +40,7 @@ public class Contact{
     @Override
     public int hashCode(){
         int result = hashCode;
-        if(result==0){
+        if (result == 0){
             result = 17;
             result = 31*result + firstName.hashCode();
             result = 31*result + lastName.hashCode();
@@ -48,13 +48,14 @@ public class Contact{
         }
         return hashCode;
     }
+
     @Override
     public boolean equals(Object o){
-        if( o == null || !(o instanceof Contact)){
+        if ( o == null || !(o instanceof Contact)){
             return false;
         }
         Contact c = (Contact) o;
-        return  c.firstName.equals(firstName) && c.lastName.equals(lastName);
+        return c.firstName.equals(firstName) && c.lastName.equals(lastName);
     }
 
     public String getFirstName() {

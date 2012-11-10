@@ -33,7 +33,7 @@ public class ReceiverThread implements Runnable{
 
     // checks if all required params are set and starts listening on port to incoming connections
     public void start(){
-        if(myContact != null && socketReader != null && messageAnalyzer != null){
+        if (myContact != null && socketReader != null && messageAnalyzer != null){
             new Thread(messageAnalyzer).start();
         }
         else{
@@ -52,7 +52,7 @@ public class ReceiverThread implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        while(true){
+        while (true){
             try {
                 Socket socket = serverSocket.accept();
                 socketReader.setSocket(socket);

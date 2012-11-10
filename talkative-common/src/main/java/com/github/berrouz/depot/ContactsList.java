@@ -31,7 +31,7 @@ public class ContactsList<E> implements Iterable<E>{
      */
     public List<E> getContactList() {
         synchronized (contactList){
-            if(!changedContactList){
+            if (!changedContactList){
                 try{
                     contactList.wait();
                 } catch (InterruptedException e) {

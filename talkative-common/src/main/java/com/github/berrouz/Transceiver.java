@@ -10,7 +10,7 @@ public class Transceiver {
     protected SenderThread senderThread;
 
     public void start(){
-        if(receiverThread != null && senderThread != null){
+        if (receiverThread != null && senderThread != null){
             new Thread(senderThread).start();
             new Thread(receiverThread).start();
         }

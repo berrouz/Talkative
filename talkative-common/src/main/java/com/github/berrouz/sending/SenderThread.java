@@ -23,7 +23,7 @@ public class SenderThread implements Runnable{
                 e.printStackTrace();
             }
             Message message;
-            if((message = messageQueue.getOutputMessages().poll())!=null){
+            if ((message = messageQueue.getOutputMessages().poll())!=null){
                 sender.sendMessage(message);
             }
         }

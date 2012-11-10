@@ -40,7 +40,7 @@ public class MessageQueue<E> {
      */
     public E poll(){
         synchronized (queue){
-            if(queue.isEmpty()){
+            if (queue.isEmpty()){
                 try {
                     queue.wait();
                 } catch (InterruptedException e) {
