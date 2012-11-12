@@ -1,6 +1,7 @@
 package com.github.berrouz.depot;
 
-import com.github.berrouz.Message;
+import com.github.berrouz.common.Message;
+import com.github.berrouz.common.depot.MessageQueue;
 import org.junit.Before;
 import org.junit.Test;
 

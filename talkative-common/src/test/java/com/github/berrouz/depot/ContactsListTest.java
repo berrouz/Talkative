@@ -1,7 +1,7 @@
 package com.github.berrouz.depot;
 
-import com.github.berrouz.Contact;
-import com.github.berrouz.depot.ContactsList;
+import com.github.berrouz.common.Contact;
+import com.github.berrouz.common.depot.ContactsList;
 import org.junit.Test;
 import java.util.LinkedList;
 import static junit.framework.Assert.assertEquals;

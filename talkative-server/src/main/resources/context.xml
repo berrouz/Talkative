@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <context:component-scan base-package="com.github.berrouz.server"/>
+
+    <bean name="serverContact" class="com.github.berrouz.common.Contact">
+        <property name="firstName" value="Server"/>
+        <property name="lastName" value="Server"/>
+        <property name="ipAddress" value="127.0.0.1"/>
+        <property name="port">
+            <value type="java.lang.Integer">7000</value>
+        </property>
+    </bean>
+
+    <bean name="transceiver" class="com.github.berrouz.common.Transceiver">
+        <property name="receiverThread" ref="receiverThread"/>
+        <property name="senderThread" ref="senderThread"/>
+    </bean>
+
+    <bean name="receiverThread" class="com.github.berrouz.common.receiving.ReceiverThread">
+        <property name="myContact" ref="serverContact"/>
+        <property name="messageAnalyzer" ref="messageAnalyzer"/>
+        <property name="socketReader" ref="socketReader"/>
+    </bean>
+
+    <bean name="messageAnalyzer" class="com.github.berrouz.server.receiver.ServerMessageAnalyzer">
+        <property name="spammer" ref="spammer"/>
+        <property name="messageQueue" ref="depot"/>
+    </bean>
+
+    <bean name="socketReader" class="com.github.berrouz.common.receiving.SocketReader"/>
+
+    <bean name="senderThread" class="com.github.berrouz.common.sending.SenderThread">
+        <property name="messageQueue" ref="depot"/>
+        <property name="sender" ref="sender"/>
+    </bean>
+
+
+    <bean name="depot" class="com.github.berrouz.common.depot.MessageDepot"/>
+
+    <bean name="sender" class="com.github.berrouz.common.sending.Sender"/>
+
+</beans>
