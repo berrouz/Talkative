@@ -21,6 +21,8 @@
         <log4j.version>1.2.17</log4j.version>
         <mysql-connector-java.version>5.1.6</mysql-connector-java.version>
         <hibernate-core.version>4.1.6.Final</hibernate-core.version>
+        <org.springframework.version>3.1.0.RELEASE</org.springframework.version>
+
     </properties>
     <repositories>
         <repository>
@@ -71,6 +73,12 @@
                 <groupId>xuggle</groupId>
                 <artifactId>xuggle-xuggler</artifactId>
                 <version>5.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${org.springframework.version}</version>
             </dependency>
 
         </dependencies>

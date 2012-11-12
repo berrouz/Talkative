@@ -8,6 +8,8 @@ import com.github.berrouz.receiving.SocketReader;
 import com.github.berrouz.sending.Sender;
 import com.github.berrouz.sending.SenderThread;
 
+import java.util.Properties;
+
 /**
  * Client encompasses all the classes required for Client side of Chat application
  */
@@ -30,6 +32,7 @@ public class Client {
         Analyzer messageAnalyzer = new MessageAnalyzer(queue);
         SocketReader socketReader = new SocketReader(queue);
         ReceiverThread receiverThread = new ReceiverThread(myContact, messageAnalyzer, socketReader);
+        receiverThread.start();
 
         // transceiver-receiver
         this.transceiver = new Transceiver();
@@ -39,5 +42,10 @@ public class Client {
 
         // starts GUI
         new GuiRunner(queue, myContact);
+    }
+
+    private void readConfig(){
+        Properties properties = new Properties();
+
     }
 }

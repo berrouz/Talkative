@@ -15,7 +15,7 @@ public class Spammer {
 
     private MessageDepot messageQueue;
 
-    private Logger logger = Logger.getLogger(Spammer.class);
+    private static final Logger logger = Logger.getLogger(Spammer.class);
 
     public Spammer(MessageDepot messageQueue, Contact serverContact){
         this.messageQueue = messageQueue;

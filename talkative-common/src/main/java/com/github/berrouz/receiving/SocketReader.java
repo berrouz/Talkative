@@ -17,7 +17,7 @@ public class SocketReader implements Runnable {
 
     private MessageDepot messageQueue;
 
-    private Logger logger = Logger.getLogger(SocketReader.class);
+    private static final Logger logger = Logger.getLogger(SocketReader.class);
 
     public SocketReader(MessageDepot messageQueue){
         this.messageQueue = messageQueue;

@@ -17,7 +17,7 @@ public class ContactsList<E> implements Iterable<E>{
     // Variable that save the state of contact list, if its stable --> FALSE, when contact list is updated, FALSE --> TRUE
     private boolean changedContactList;
 
-    private Logger logger = Logger.getLogger(ContactsList.class);
+    private static final Logger logger = Logger.getLogger(ContactsList.class);
 
     public ContactsList(){
         this.contactList = new LinkedList<E>();

@@ -18,7 +18,7 @@ public class Model {
 
     private MessageDepot messageQueue;
 
-    private Logger logger = Logger.getLogger(Model.class);
+    private static final Logger logger = Logger.getLogger(Model.class);
 
     public Model(MessageDepot messageQueue, View view, Contact myContact){
         this.view = view;

@@ -9,8 +9,11 @@ import java.awt.*;
  * and shows them in GUI
  */
 public class SmsReader implements Runnable{
+
     private MessageDepot messageQueue;
+
     private View view;
+
     public SmsReader(MessageDepot messageQueue, View view){
         this.messageQueue = messageQueue;
         this.view = view;

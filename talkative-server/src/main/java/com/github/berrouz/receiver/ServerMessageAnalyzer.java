@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 public class ServerMessageAnalyzer extends Analyzer {
     private Spammer spammer;
 
-    private Logger logger = Logger.getLogger(ServerMessageAnalyzer.class);
+    private static final Logger logger = Logger.getLogger(ServerMessageAnalyzer.class);
 
     public ServerMessageAnalyzer(MessageDepot messageQueue, Spammer spammer){
         super(messageQueue);

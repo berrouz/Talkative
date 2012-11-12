@@ -48,7 +48,7 @@ public class View extends JFrame {
         pack();
     }
 
-    // Setting main Window properties
+    // Setting main Window config
     void setDefault(){
         setLocation(defaultLocationX, defaultLocationY);
         setPreferredSize(defaultDimension);

@@ -23,7 +23,7 @@ public class MessageDepot {
     private MessageQueue<Message> inputSMS;
 
     // logger
-    private Logger logger = Logger.getLogger(MessageDepot.class);
+    private static final Logger logger = Logger.getLogger(MessageDepot.class);
 
     public MessageDepot(){
         this.inputMessages = new MessageQueue<Message>();

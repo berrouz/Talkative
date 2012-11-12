@@ -11,7 +11,8 @@ import java.net.Socket;
  * Sender class is to send a message to client
  */
 public class Sender {
-    private Logger logger = Logger.getLogger(Sender.class);
+
+    private static final Logger logger = Logger.getLogger(Sender.class);
 
     /**
      * send Message to the recipient, mentioned in Message object

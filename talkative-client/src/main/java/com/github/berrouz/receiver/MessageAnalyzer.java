@@ -14,7 +14,7 @@ import java.util.Queue;
 
 public class MessageAnalyzer extends Analyzer {
 
-    private Logger logger = Logger.getLogger(MessageAnalyzer.class);
+    private static final Logger logger = Logger.getLogger(MessageAnalyzer.class);
 
     public MessageAnalyzer(MessageDepot messageQueue){
         super(messageQueue);

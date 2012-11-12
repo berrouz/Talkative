@@ -12,7 +12,7 @@ public class MessageQueue<E> {
     // input queue
     private final Queue<E> queue;
 
-    private Logger logger = Logger.getLogger(MessageQueue.class);
+    private static final Logger logger = Logger.getLogger(MessageQueue.class);
 
     public MessageQueue(){
         this.queue = new LinkedList<E>();

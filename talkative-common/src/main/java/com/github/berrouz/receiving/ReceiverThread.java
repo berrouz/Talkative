@@ -22,13 +22,12 @@ public class ReceiverThread implements Runnable{
     // own realization of abstract class Analyzer
     private Analyzer messageAnalyzer;
 
-    private Logger logger = Logger.getLogger(ReceiverThread.class);
+    private static final Logger logger = Logger.getLogger(ReceiverThread.class);
 
     public ReceiverThread(Contact contact, Analyzer messageAnalyzer, SocketReader socketReader){
         this.myContact = contact;
         this.socketReader = socketReader;
         this.messageAnalyzer = messageAnalyzer;
-        start();
     }
 
     // checks if all required params are set and starts listening on port to incoming connections

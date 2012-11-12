@@ -12,7 +12,7 @@ public abstract class Analyzer implements Runnable{
 
     protected MessageDepot messageQueue;
 
-    private Logger logger = Logger.getLogger(this.getClass());
+    private static final Logger logger = Logger.getLogger(Analyzer.class);
 
     protected Analyzer(MessageDepot messageQueue){
         this.messageQueue = messageQueue;

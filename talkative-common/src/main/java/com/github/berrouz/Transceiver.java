@@ -6,7 +6,9 @@ import com.github.berrouz.sending.SenderThread;
 
 // class holds sender and receiver threads
 public class Transceiver {
+
     private ReceiverThread receiverThread;
+
     protected SenderThread senderThread;
 
     public void start(){

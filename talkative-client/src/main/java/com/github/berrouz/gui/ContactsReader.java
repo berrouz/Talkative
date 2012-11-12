@@ -15,7 +15,7 @@ public class ContactsReader implements Runnable{
     // Depot of all messages and contact for Chat application
     private MessageDepot messageQueue;
 
-    private Logger logger = Logger.getLogger(ContactsReader.class);
+    private static final Logger logger = Logger.getLogger(ContactsReader.class);
 
     public ContactsReader(MessageDepot messageQueue, View view){
         this.messageQueue = messageQueue;
