@@ -23,8 +23,6 @@ public abstract class Analyzer implements Runnable{
     public void run() {
         Message message;
         while (true){
-
-                logger.debug("Input Queue is not empty");
                 analyze(messageQueue.getInputMessages().poll());
                 logger.debug("Message is to be analyzed in "+ this.getClass());
 

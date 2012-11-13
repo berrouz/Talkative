@@ -70,6 +70,16 @@ public final class Message implements SendableAsJson{
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Message{" +
+                "type=" + type +
+                ", data='" + data + '\'' +
+                ", recipient=" + recipient +
+                ", sender=" + sender +
+                '}';
+    }
+
     public String toJson(){
         return new Gson().toJson(this);
     }

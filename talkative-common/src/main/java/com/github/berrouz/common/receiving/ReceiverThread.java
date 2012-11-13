@@ -4,6 +4,7 @@ import com.github.berrouz.common.Contact;
 import com.github.berrouz.common.errors.ArgumentError;
 import org.apache.log4j.Logger;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -27,6 +28,7 @@ public class ReceiverThread implements Runnable{
     private static final Logger logger = Logger.getLogger(ReceiverThread.class);
 
     // checks if all required params are set and starts listening on port to incoming connections
+    @PostConstruct
     public void start(){
         if (myContact != null && socketReader != null && messageAnalyzer != null){
             new Thread(messageAnalyzer).start();
@@ -41,11 +43,13 @@ public class ReceiverThread implements Runnable{
      */
     @Override
     public void run() {
+        System.out.println("INVOKEED"+ myContact.getPort());
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(myContact.getPort());
+            logger.debug("Socket on port "+ myContact.getPort() + " has been opened");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Cannot open server socket on port " + myContact.getPort(), e);
         }
         while (true){
             try {
@@ -57,10 +61,6 @@ public class ReceiverThread implements Runnable{
                 logger.error("IOException in "+ ReceiverThread.class + " instance " + this, e);
             }
         }
-    }
-
-    public SocketReader getSocketReader() {
-        return socketReader;
     }
 
     public void setMessageAnalyzer(Analyzer messageAnalyzer) {

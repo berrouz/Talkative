@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,8 +17,10 @@ import java.util.List;
 @Component
 public class Spammer {
 
+    @Inject
     public Contact serverContact;
 
+    @Inject
     private MessageDepot messageQueue;
 
     private static final Logger logger = Logger.getLogger(Spammer.class);
@@ -32,7 +35,9 @@ public class Spammer {
         for (Contact contact: currentContactList){
             contactList = getCopy(currentContactList);
             contactList.remove(contact);                        // removes contact of recipient from sent list
-            messageQueue.getOutputMessages().add(new Message(new Gson().toJson(contactList), Message.MESSAGE_TYPES.CONTACT_LIST, contact, serverContact));
+            Message message = new Message(new Gson().toJson(contactList), Message.MESSAGE_TYPES.CONTACT_LIST, contact, serverContact);
+            logger.debug("Sent message is " + message.toString() );
+            messageQueue.getOutputMessages().add(message);
             logger.debug("Send updated contact list with "+ contactList.size() + " to "+ contact.toString());
         }
     }

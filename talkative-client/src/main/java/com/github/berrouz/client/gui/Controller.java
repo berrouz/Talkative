@@ -1,6 +1,11 @@
 package com.github.berrouz.client.gui;
 
 import com.github.berrouz.common.Contact;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -9,20 +14,30 @@ import java.awt.event.WindowEvent;
 /**
  * Controller part of MVC
  */
+@Component
 public class Controller {
 
     // reference to Model
+    @Inject
     private Model model;
 
     // reference to View
+    @Inject
     private View view;
 
-    public Controller(Model m, View v){
-        this.model = m;
-        this.view  = v;
+    private static final Logger logger = Logger.getLogger(Controller.class);
+
+
+    public Controller(){
+        //setListeners();
+    }
+
+    @PostConstruct
+    public void setListeners(){
         view.sendButton.addActionListener(new ClickOnSendButtonListener());
         view.addWindowListener(new MainWindowListener());
         view.addWindowListener(new HelloSender());
+        model.sendHelloMessage();
     }
 
     // Listener Class waits for clicking Send Button in View
@@ -47,8 +62,9 @@ public class Controller {
     // When main window is started client sends HELLO message to the Server in order to update current list of contacts
     private class HelloSender extends WindowAdapter{
         @Override
-        public void windowOpened(WindowEvent e){
+        public void windowGainedFocus(WindowEvent e){
             model.sendHelloMessage();
+            logger.info("HELLO message has been sent to server");
         }
     }
 }

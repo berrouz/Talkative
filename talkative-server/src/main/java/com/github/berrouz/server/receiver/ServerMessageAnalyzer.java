@@ -15,17 +15,19 @@ public class ServerMessageAnalyzer extends Analyzer {
 
     @Override
     public void analyze(Message message) {
-        System.out.println("Entered");
+        logger.debug(message+" is going to be analyzed by "+ ServerMessageAnalyzer.class);
         switch (message.getType()){
             case ADD_CONTACT    :
-                System.out.println("Received message");
+                logger.debug("ADD_CONTACT Message has been received from "+ message.getFromWhom());
                 messageQueue.getContactList().add(message.getFromWhom());
-                System.out.println("Just added");
+                logger.debug("NEW CONTACT "+ message.getFromWhom() + " has been added to the current contact list");
                 spammer.sendToAll(messageQueue.getContactList().getContactList());
                 logger.debug("Contact has been added to contact list on the server and send to clients");
                 break;
             case REMOVE_CONTACT :
+                logger.debug("Contact list before REMOVAL has "+ messageQueue.getContactList().size() +" contacts");
                 messageQueue.getContactList().remove(message.getFromWhom());
+                logger.debug("Contact list after REMOVAL has "+ messageQueue.getContactList().size() +" contacts");
                 spammer.sendToAll(messageQueue.getContactList().getContactList());
                 break;
 
@@ -35,6 +37,4 @@ public class ServerMessageAnalyzer extends Analyzer {
     public void setSpammer(Spammer spammer) {
         this.spammer = spammer;
     }
-
-
 }

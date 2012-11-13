@@ -6,6 +6,7 @@ import java.awt.*;
 /**
  * View Side of MVC
  */
+@org.springframework.stereotype.Component
 public class View extends JFrame {
 
     // X location of the main window
@@ -52,7 +53,7 @@ public class View extends JFrame {
     void setDefault(){
         setLocation(defaultLocationX, defaultLocationY);
         setPreferredSize(defaultDimension);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
     }
 

@@ -20,6 +20,8 @@ public class Sender {
      * @param message
      */
     public void sendMessage(Message message){
+        logger.debug("Sender is going to send message "+ message+ " and connect with " +
+                ""+ message.getRecipient().getIpAddress()+ " and port " + message.getRecipient().getPort());
         try {
             Socket socket = new Socket(message.getRecipient().getIpAddress(), message.getRecipient().getPort());
             OutputStreamWriter outputBuffer = new OutputStreamWriter(socket.getOutputStream());

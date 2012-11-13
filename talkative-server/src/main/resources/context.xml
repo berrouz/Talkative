@@ -6,7 +6,7 @@
 
     <context:component-scan base-package="com.github.berrouz.server"/>
 
-    <bean name="serverContact" class="com.github.berrouz.common.Contact">
+    <bean id="serverContact" class="com.github.berrouz.common.Contact">
         <property name="firstName" value="Server"/>
         <property name="lastName" value="Server"/>
         <property name="ipAddress" value="127.0.0.1"/>
@@ -15,32 +15,34 @@
         </property>
     </bean>
 
-    <bean name="transceiver" class="com.github.berrouz.common.Transceiver">
+    <bean id="transceiver" class="com.github.berrouz.common.Transceiver">
         <property name="receiverThread" ref="receiverThread"/>
         <property name="senderThread" ref="senderThread"/>
     </bean>
 
-    <bean name="receiverThread" class="com.github.berrouz.common.receiving.ReceiverThread">
+    <bean id="receiverThread" class="com.github.berrouz.common.receiving.ReceiverThread">
         <property name="myContact" ref="serverContact"/>
         <property name="messageAnalyzer" ref="messageAnalyzer"/>
         <property name="socketReader" ref="socketReader"/>
     </bean>
 
-    <bean name="messageAnalyzer" class="com.github.berrouz.server.receiver.ServerMessageAnalyzer">
+    <bean id="messageAnalyzer" class="com.github.berrouz.server.receiver.ServerMessageAnalyzer">
         <property name="spammer" ref="spammer"/>
         <property name="messageQueue" ref="depot"/>
     </bean>
 
-    <bean name="socketReader" class="com.github.berrouz.common.receiving.SocketReader"/>
+    <bean id="socketReader" class="com.github.berrouz.common.receiving.SocketReader">
+        <property name="messageQueue" ref="depot"/>
+    </bean>
 
-    <bean name="senderThread" class="com.github.berrouz.common.sending.SenderThread">
+    <bean id="senderThread" class="com.github.berrouz.common.sending.SenderThread">
         <property name="messageQueue" ref="depot"/>
         <property name="sender" ref="sender"/>
     </bean>
 
 
-    <bean name="depot" class="com.github.berrouz.common.depot.MessageDepot"/>
+    <bean id="depot" class="com.github.berrouz.common.depot.MessageDepot"/>
 
-    <bean name="sender" class="com.github.berrouz.common.sending.Sender"/>
+    <bean id="sender" class="com.github.berrouz.common.sending.Sender"/>
 
 </beans>

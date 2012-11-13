@@ -2,7 +2,6 @@ package com.github.berrouz.client.receiver;
 
 import com.github.berrouz.common.Contact;
 import com.github.berrouz.common.Message;
-import com.github.berrouz.common.depot.MessageDepot;
 import com.github.berrouz.common.receiving.Analyzer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -15,10 +14,6 @@ import java.util.Queue;
 public class MessageAnalyzer extends Analyzer {
 
     private static final Logger logger = Logger.getLogger(MessageAnalyzer.class);
-
-    public MessageAnalyzer(MessageDepot messageQueue){
-        super(messageQueue);
-    }
 
     public void analyze(Message message){
         logger.debug(message);

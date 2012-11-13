@@ -4,11 +4,47 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <context:component-scan base-package="com.github.berrouz.common"/>
     <context:component-scan base-package="com.github.berrouz.client"/>
-    <context:component-scan base-package="com.github.berrouz.server"/>
 
-    <bean name="serverContact">
+    <bean id="clientContact" class="com.github.berrouz.common.Contact">
+        <property name="ipAddress" value="127.0.0.1"/>
+    </bean>
+    <bean id="transceiver" class="com.github.berrouz.common.Transceiver">
+        <property name="receiverThread" ref="receiverThread"/>
+        <property name="senderThread" ref="senderThread"/>
+    </bean>
 
+    <bean id="receiverThread" class="com.github.berrouz.common.receiving.ReceiverThread">
+        <property name="myContact" ref="clientContact"/>
+        <property name="messageAnalyzer" ref="messageAnalyzer"/>
+        <property name="socketReader" ref="socketReader"/>
+    </bean>
+
+    <bean id="messageAnalyzer" class="com.github.berrouz.client.receiver.MessageAnalyzer">
+        <property name="messageQueue" ref="depot"/>
+    </bean>
+
+    <bean id="socketReader" class="com.github.berrouz.common.receiving.SocketReader">
+        <property name="messageQueue" ref="depot"/>
+    </bean>
+
+    <bean id="senderThread" class="com.github.berrouz.common.sending.SenderThread">
+        <property name="messageQueue" ref="depot"/>
+        <property name="sender" ref="sender"/>
+    </bean>
+
+
+    <bean id="depot" class="com.github.berrouz.common.depot.MessageDepot"/>
+
+    <bean id="sender" class="com.github.berrouz.common.sending.Sender"/>
+
+
+    <bean id="serverContact" class="com.github.berrouz.common.Contact">
+        <property name="firstName" value="Server"/>
+        <property name="lastName" value="Server"/>
+        <property name="ipAddress" value="127.0.0.1"/>
+        <property name="port">
+            <value type="java.lang.Integer">7000</value>
+        </property>
     </bean>
 </beans>

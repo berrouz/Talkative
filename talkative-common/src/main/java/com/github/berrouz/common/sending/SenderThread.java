@@ -21,6 +21,8 @@ public class SenderThread implements Runnable{
             Message message;
             if ((message = messageQueue.getOutputMessages().poll())!=null){
                 sender.sendMessage(message);
+                logger.debug("Message from "+message.getFromWhom()+" to "+
+                        message.getRecipient()+" within class "+ SenderThread.class +" has been sent");
             }
         }
     }

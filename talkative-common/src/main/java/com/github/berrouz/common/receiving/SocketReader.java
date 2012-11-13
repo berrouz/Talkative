@@ -47,4 +47,8 @@ public class SocketReader implements Runnable {
     public void setSocket(Socket socket) {
         this.socket = socket;
     }
+
+    public void setMessageQueue(MessageDepot messageQueue) {
+        this.messageQueue = messageQueue;
+    }
 }
