@@ -4,7 +4,6 @@ import com.github.berrouz.common.Message;
 import com.github.berrouz.common.depot.MessageDepot;
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +13,7 @@ import java.net.Socket;
 /**
  * SocketReader reads from accepted socket and saves to MessageDepot inputMessages queue
  */
-@Component
+
 public class SocketReader implements Runnable {
 
     private Socket socket;

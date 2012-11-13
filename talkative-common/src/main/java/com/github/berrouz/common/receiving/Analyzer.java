@@ -21,11 +21,9 @@ public abstract class Analyzer implements Runnable{
      */
     @Override
     public void run() {
-        Message message;
         while (true){
-                analyze(messageQueue.getInputMessages().poll());
-                logger.debug("Message is to be analyzed in "+ this.getClass());
-
+            analyze(messageQueue.getInputMessages().poll());
+            logger.debug("Message is to be analyzed in "+ this.getClass());
         }
     }
 

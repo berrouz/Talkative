@@ -64,7 +64,6 @@ public class Controller {
         @Override
         public void windowGainedFocus(WindowEvent e){
             model.sendHelloMessage();
-            logger.info("HELLO message has been sent to server");
         }
     }
 }

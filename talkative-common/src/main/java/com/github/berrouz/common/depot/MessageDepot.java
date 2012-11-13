@@ -3,14 +3,12 @@ package com.github.berrouz.common.depot;
 import com.github.berrouz.common.Contact;
 import com.github.berrouz.common.Message;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Message Depot is class where all messages and contacts are saved
  */
-@Component
 public class MessageDepot {
 
     // general inputMessages queue for every Message received

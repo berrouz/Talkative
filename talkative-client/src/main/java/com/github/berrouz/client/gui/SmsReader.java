@@ -1,6 +1,7 @@
 package com.github.berrouz.client.gui;
 
 import com.github.berrouz.common.Message;
+import com.github.berrouz.common.ThreadExecutor;
 import com.github.berrouz.common.depot.MessageDepot;
 import org.apache.log4j.Logger;
 
@@ -16,6 +17,9 @@ import java.awt.*;
 public class SmsReader implements Runnable{
 
     @Inject
+    private ThreadExecutor threadExecutor;
+
+    @Inject
     private MessageDepot messageQueue;
 
     @Inject
@@ -25,7 +29,7 @@ public class SmsReader implements Runnable{
 
     @PostConstruct
     public void start(){
-        new Thread(this).start();
+        threadExecutor.execute(this);
         logger.debug("SMS Reader Thread has been started");
     }
 

@@ -31,7 +31,7 @@ public class Sender {
             printWriter.close();
             socket.close();
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.error("Cannot send Message in "+Sender.class, e);
         }
     }
 }

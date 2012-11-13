@@ -38,6 +38,8 @@ public class Model {
      */
     public void sendMessage(Message message){
         messageQueue.getOutputMessages().add(message);
+        logger.debug("Client sends hello message to the server");
+
     }
 
     /**
@@ -58,7 +60,7 @@ public class Model {
     public void sendSMS(String textToBeSent, Contact toWhom){
         Message message = new Message(textToBeSent, Message.MESSAGE_TYPES.SMS, toWhom, clientContact);
         sendMessage(message);
-        logger.info("Client sends sms message to the server");
+        logger.debug("Client sends sms message to the server");
     }
 
     /**
@@ -67,7 +69,6 @@ public class Model {
     public void sendHelloMessage(){
         Message message = new Message("Hello", Message.MESSAGE_TYPES.ADD_CONTACT, Global.SERVER_CONTACT.myContact, clientContact);
         sendMessage(message);
-        logger.info("Client sends hello message to the server");
     }
 }
 

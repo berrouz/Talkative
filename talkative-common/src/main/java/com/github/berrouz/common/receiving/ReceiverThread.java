@@ -1,6 +1,7 @@
 package com.github.berrouz.common.receiving;
 
 import com.github.berrouz.common.Contact;
+import com.github.berrouz.common.ThreadExecutor;
 import com.github.berrouz.common.errors.ArgumentError;
 import org.apache.log4j.Logger;
 
@@ -21,6 +22,8 @@ public class ReceiverThread implements Runnable{
     // Socket Reader is a thread which reads data from accepted socket
     private SocketReader socketReader;
 
+    private ThreadExecutor threadExecutor;
+
     // Class which analyze messages in input queue and sorts them accordingly, server and client both provide their
     // own realization of abstract class Analyzer
     private Analyzer messageAnalyzer;
@@ -31,7 +34,7 @@ public class ReceiverThread implements Runnable{
     @PostConstruct
     public void start(){
         if (myContact != null && socketReader != null && messageAnalyzer != null){
-            new Thread(messageAnalyzer).start();
+            threadExecutor.execute(messageAnalyzer);
         }
         else{
             throw new ArgumentError("Not all arguments set in class "+ ReceiverThread.class);
@@ -43,7 +46,6 @@ public class ReceiverThread implements Runnable{
      */
     @Override
     public void run() {
-        System.out.println("INVOKEED"+ myContact.getPort());
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(myContact.getPort());
@@ -55,7 +57,7 @@ public class ReceiverThread implements Runnable{
             try {
                 Socket socket = serverSocket.accept();
                 socketReader.setSocket(socket);
-                new Thread(socketReader).start();
+                threadExecutor.execute(socketReader);
                 logger.debug("Server " + ReceiverThread.class + " has accepted new client and started new socketReader Thread");
             } catch (IOException e) {
                 logger.error("IOException in "+ ReceiverThread.class + " instance " + this, e);
@@ -73,6 +75,10 @@ public class ReceiverThread implements Runnable{
 
     public void setMyContact(Contact myContact) {
         this.myContact = myContact;
+    }
+
+    public void setThreadExecutor(ThreadExecutor threadExecutor) {
+        this.threadExecutor = threadExecutor;
     }
 }
 

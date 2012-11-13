@@ -12,12 +12,14 @@
     <bean id="transceiver" class="com.github.berrouz.common.Transceiver">
         <property name="receiverThread" ref="receiverThread"/>
         <property name="senderThread" ref="senderThread"/>
+        <property name="threadExecutor" ref="threadExecutor"/>
     </bean>
 
     <bean id="receiverThread" class="com.github.berrouz.common.receiving.ReceiverThread">
         <property name="myContact" ref="clientContact"/>
         <property name="messageAnalyzer" ref="messageAnalyzer"/>
         <property name="socketReader" ref="socketReader"/>
+        <property name="threadExecutor" ref="threadExecutor"/>
     </bean>
 
     <bean id="messageAnalyzer" class="com.github.berrouz.client.receiver.MessageAnalyzer">
@@ -33,6 +35,9 @@
         <property name="sender" ref="sender"/>
     </bean>
 
+    <bean id="threadExecutor" class="com.github.berrouz.common.ThreadExecutor">
+
+    </bean>
 
     <bean id="depot" class="com.github.berrouz.common.depot.MessageDepot"/>
 

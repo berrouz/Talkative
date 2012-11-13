@@ -1,7 +1,6 @@
 package com.github.berrouz.common.depot;
 
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -10,7 +9,6 @@ import java.util.Queue;
  *  Collection for holding messages
  * @param <E>
  */
-@Component
 public class MessageQueue<E> {
     // input queue
     private final Queue<E> queue;

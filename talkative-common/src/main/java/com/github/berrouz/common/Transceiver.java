@@ -9,14 +9,16 @@ import com.github.berrouz.common.sending.SenderThread;
 
 public class Transceiver {
 
+    private ThreadExecutor threadExecutor;
+
     private ReceiverThread receiverThread;
 
     protected SenderThread senderThread;
 
     public void start(){
         if (receiverThread != null && senderThread != null){
-            new Thread(senderThread).start();
-            new Thread(receiverThread).start();
+            threadExecutor.execute(senderThread);
+            threadExecutor.execute(receiverThread);
         }
         else{
             throw new ArgumentError("Not all arguments have been set in class "+ Transceiver.class);
@@ -29,5 +31,9 @@ public class Transceiver {
 
     public void setSenderThread(SenderThread senderThread) {
         this.senderThread = senderThread;
+    }
+
+    public void setThreadExecutor(ThreadExecutor threadExecutor) {
+        this.threadExecutor = threadExecutor;
     }
 }

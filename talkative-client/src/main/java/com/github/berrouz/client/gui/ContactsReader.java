@@ -1,6 +1,7 @@
 package com.github.berrouz.client.gui;
 
 import com.github.berrouz.common.Contact;
+import com.github.berrouz.common.ThreadExecutor;
 import com.github.berrouz.common.depot.MessageDepot;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,10 @@ import java.util.List;
 @Component
 public class ContactsReader implements Runnable{
 
+
+    @Inject
+    private ThreadExecutor threadExecutor;
+
     @Inject
     private View view;
 
@@ -26,7 +31,7 @@ public class ContactsReader implements Runnable{
 
     @PostConstruct
     public void start(){
-        new Thread(this).start();
+        threadExecutor.execute(this);
     }
     /**
      * If Contact list was updated, then it removes all contacts from GUI and
@@ -42,5 +47,9 @@ public class ContactsReader implements Runnable{
             }
             logger.debug("Contact List is updated by "+ this.getClass());
         }
+    }
+
+    public void setThreadExecutor(ThreadExecutor threadExecutor) {
+        this.threadExecutor = threadExecutor;
     }
 }
