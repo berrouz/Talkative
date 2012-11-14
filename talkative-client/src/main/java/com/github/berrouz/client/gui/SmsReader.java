@@ -4,6 +4,7 @@ import com.github.berrouz.common.Message;
 import com.github.berrouz.common.ThreadExecutor;
 import com.github.berrouz.common.depot.MessageDepot;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -14,6 +15,7 @@ import java.awt.*;
  * and shows them in GUI
  */
 @org.springframework.stereotype.Component
+@Scope("singleton")
 public class SmsReader implements Runnable{
 
     @Inject

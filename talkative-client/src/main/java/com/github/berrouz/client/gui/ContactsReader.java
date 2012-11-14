@@ -4,6 +4,7 @@ import com.github.berrouz.common.Contact;
 import com.github.berrouz.common.ThreadExecutor;
 import com.github.berrouz.common.depot.MessageDepot;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +15,7 @@ import java.util.List;
  * Reads contacts from MessageDepot and shows them in GUI
  */
 @Component
+@Scope("singleton")
 public class ContactsReader implements Runnable{
 
 

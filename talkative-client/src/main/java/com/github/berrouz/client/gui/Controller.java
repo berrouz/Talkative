@@ -2,6 +2,7 @@ package com.github.berrouz.client.gui;
 
 import com.github.berrouz.common.Contact;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +16,7 @@ import java.awt.event.WindowEvent;
  * Controller part of MVC
  */
 @Component
+@Scope("singleton")
 public class Controller {
 
     // reference to Model
@@ -26,11 +28,6 @@ public class Controller {
     private View view;
 
     private static final Logger logger = Logger.getLogger(Controller.class);
-
-
-    public Controller(){
-        //setListeners();
-    }
 
     @PostConstruct
     public void setListeners(){
@@ -45,9 +42,12 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             String textToBeSent = view.textAreaToSend.getText();
-            Contact recipient = (Contact) view.names.getSelectedItem();
-            model.sendSMS(textToBeSent, recipient);
-            view.textAreaToSend.setText("");
+
+            if (textToBeSent.length()!= 0 && view.names.getSelectedItem() != null){
+                Contact recipient = (Contact) view.names.getSelectedItem();
+                model.sendSMS(textToBeSent, recipient);
+                view.textAreaToSend.setText("");
+            }
         }
     }
 
@@ -62,8 +62,17 @@ public class Controller {
     // When main window is started client sends HELLO message to the Server in order to update current list of contacts
     private class HelloSender extends WindowAdapter{
         @Override
-        public void windowGainedFocus(WindowEvent e){
+        public void windowLostFocus(WindowEvent e){
             model.sendHelloMessage();
+            view.setTitle(model.getClientContact().getFullName());
         }
+    }
+
+
+    /**
+     * update Title of View
+     */
+    public void updateTitle(){
+        view.setTitle(model.getClientContact().getFullName());
     }
 }

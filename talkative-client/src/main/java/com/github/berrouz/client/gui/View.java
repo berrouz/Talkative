@@ -1,5 +1,7 @@
 package com.github.berrouz.client.gui;
 
+import org.springframework.context.annotation.Scope;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,6 +9,7 @@ import java.awt.*;
  * View Side of MVC
  */
 @org.springframework.stereotype.Component
+@Scope("singleton")
 public class View extends JFrame {
 
     // X location of the main window

@@ -6,45 +6,46 @@
 
     <context:component-scan base-package="com.github.berrouz.client"/>
 
-    <bean id="clientContact" class="com.github.berrouz.common.Contact">
+    <bean id="clientContact" class="com.github.berrouz.common.Contact" scope="singleton">
         <property name="ipAddress" value="127.0.0.1"/>
     </bean>
-    <bean id="transceiver" class="com.github.berrouz.common.Transceiver">
+
+    <bean id="transceiver" class="com.github.berrouz.common.Transceiver" scope="singleton">
         <property name="receiverThread" ref="receiverThread"/>
         <property name="senderThread" ref="senderThread"/>
         <property name="threadExecutor" ref="threadExecutor"/>
     </bean>
 
-    <bean id="receiverThread" class="com.github.berrouz.common.receiving.ReceiverThread">
+    <bean id="receiverThread" class="com.github.berrouz.common.receiving.ReceiverThread" scope="singleton">
         <property name="myContact" ref="clientContact"/>
         <property name="messageAnalyzer" ref="messageAnalyzer"/>
         <property name="socketReader" ref="socketReader"/>
         <property name="threadExecutor" ref="threadExecutor"/>
     </bean>
 
-    <bean id="messageAnalyzer" class="com.github.berrouz.client.receiver.MessageAnalyzer">
+    <bean id="messageAnalyzer" class="com.github.berrouz.client.receiver.MessageAnalyzer" scope="singleton">
         <property name="messageQueue" ref="depot"/>
     </bean>
 
-    <bean id="socketReader" class="com.github.berrouz.common.receiving.SocketReader">
+    <bean id="socketReader" class="com.github.berrouz.common.receiving.SocketReader" scope="singleton">
         <property name="messageQueue" ref="depot"/>
     </bean>
 
-    <bean id="senderThread" class="com.github.berrouz.common.sending.SenderThread">
+    <bean id="senderThread" class="com.github.berrouz.common.sending.SenderThread" scope="singleton">
         <property name="messageQueue" ref="depot"/>
         <property name="sender" ref="sender"/>
     </bean>
 
-    <bean id="threadExecutor" class="com.github.berrouz.common.ThreadExecutor">
+    <bean id="threadExecutor" class="com.github.berrouz.common.ThreadExecutor" scope="singleton">
 
     </bean>
 
-    <bean id="depot" class="com.github.berrouz.common.depot.MessageDepot"/>
+    <bean id="depot" class="com.github.berrouz.common.depot.MessageDepot" scope="singleton"/>
 
-    <bean id="sender" class="com.github.berrouz.common.sending.Sender"/>
+    <bean id="sender" class="com.github.berrouz.common.sending.Sender" scope="singleton"/>
 
 
-    <bean id="serverContact" class="com.github.berrouz.common.Contact">
+    <bean id="serverContact" class="com.github.berrouz.common.Contact" scope="singleton">
         <property name="firstName" value="Server"/>
         <property name="lastName" value="Server"/>
         <property name="ipAddress" value="127.0.0.1"/>

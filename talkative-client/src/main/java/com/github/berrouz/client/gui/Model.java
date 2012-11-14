@@ -5,6 +5,7 @@ import com.github.berrouz.common.Contact;
 import com.github.berrouz.common.Message;
 import com.github.berrouz.common.depot.MessageDepot;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +16,7 @@ import javax.inject.Inject;
  * Model side of  MVC
  */
 @Component
+@Scope("singleton")
 public class Model {
 
     @Inject
@@ -69,6 +71,22 @@ public class Model {
     public void sendHelloMessage(){
         Message message = new Message("Hello", Message.MESSAGE_TYPES.ADD_CONTACT, Global.SERVER_CONTACT.myContact, clientContact);
         sendMessage(message);
+    }
+
+    public Contact getClientContact() {
+        return clientContact;
+    }
+
+    public void setClientContact(Contact clientContact) {
+        this.clientContact = clientContact;
+    }
+
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    public void setMessageQueue(MessageDepot messageQueue) {
+        this.messageQueue = messageQueue;
     }
 }
 
