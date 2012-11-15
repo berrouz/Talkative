@@ -2,7 +2,7 @@ package com.github.berrouz.common;
 
 import com.google.gson.Gson;
 
-public final class Message implements SendableAsJson{
+public class Message implements SendableAsJson{
     
     // The value is used to define the type of the message
     private MESSAGE_TYPES type;
@@ -26,6 +26,10 @@ public final class Message implements SendableAsJson{
         this.sender = sender;
     }
 
+    /**
+     *
+     * Getters and Setters
+     */
     public String getData() {
         return data;
     }
@@ -40,6 +44,22 @@ public final class Message implements SendableAsJson{
 
     public MESSAGE_TYPES getType() {
         return type;
+    }
+
+    public void setType(MESSAGE_TYPES type) {
+        this.type = type;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public void setRecipient(Contact recipient) {
+        this.recipient = recipient;
+    }
+
+    public void setSender(Contact sender) {
+        this.sender = sender;
     }
 
     public static enum MESSAGE_TYPES{

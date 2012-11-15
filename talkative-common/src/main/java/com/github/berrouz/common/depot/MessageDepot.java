@@ -33,6 +33,9 @@ public class MessageDepot {
         this.inputSMS       = new MessageQueue<Message>();
     }
 
+
+    // Getters and Setters
+
     public MessageQueue<Message> getInputMessages() {
         return inputMessages;
     }
@@ -51,5 +54,21 @@ public class MessageDepot {
 
     public MessageQueue<Message> getOutputMessages() {
         return outputMessages;
+    }
+
+    public void setInputMessages(MessageQueue<Message> inputMessages) {
+        this.inputMessages = inputMessages;
+    }
+
+    public void setOutputMessages(MessageQueue<Message> outputMessages) {
+        this.outputMessages = outputMessages;
+    }
+
+    public void setContactList(ContactsList<Contact> contactList) {
+        this.contactList = contactList;
+    }
+
+    public void setInputSMS(MessageQueue<Message> inputSMS) {
+        this.inputSMS = inputSMS;
     }
 }

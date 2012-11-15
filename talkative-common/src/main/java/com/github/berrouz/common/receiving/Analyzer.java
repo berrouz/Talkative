@@ -32,4 +32,8 @@ public abstract class Analyzer implements Runnable{
     public void setMessageQueue(MessageDepot messageQueue) {
         this.messageQueue = messageQueue;
     }
+
+    public MessageDepot getMessageQueue() {
+        return messageQueue;
+    }
 }
