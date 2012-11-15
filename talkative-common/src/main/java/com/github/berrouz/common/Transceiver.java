@@ -2,7 +2,7 @@ package com.github.berrouz.common;
 
 import com.github.berrouz.common.errors.ArgumentError;
 import com.github.berrouz.common.receiving.ReceiverThread;
-import com.github.berrouz.common.sending.SenderThread;
+import com.github.berrouz.common.sending.Sender;
 
 // class holds sender and receiver threads
 
@@ -13,11 +13,11 @@ public class Transceiver {
 
     private ReceiverThread receiverThread;
 
-    protected SenderThread senderThread;
+    protected Sender sender;
 
     public void start(){
-        if (receiverThread != null && senderThread != null){
-            threadExecutor.execute(senderThread);
+        if (receiverThread != null && sender != null){
+            threadExecutor.execute(sender);
             threadExecutor.execute(receiverThread);
         }
         else{
@@ -29,8 +29,8 @@ public class Transceiver {
         this.receiverThread = receiverThread;
     }
 
-    public void setSenderThread(SenderThread senderThread) {
-        this.senderThread = senderThread;
+    public void setSender(Sender sender) {
+        this.sender = sender;
     }
 
     public void setThreadExecutor(ThreadExecutor threadExecutor) {

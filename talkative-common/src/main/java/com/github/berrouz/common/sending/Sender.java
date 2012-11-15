@@ -2,6 +2,7 @@ package com.github.berrouz.common.sending;
 
 import com.github.berrouz.common.Contact;
 import com.github.berrouz.common.Message;
+import com.github.berrouz.common.depot.MessageDepot;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -12,9 +13,23 @@ import java.net.Socket;
 /**
  * Sender class is to send a message to client
  */
-public class Sender {
+public class Sender implements Runnable{
+
+    private MessageDepot messageQueue;
 
     private static final Logger logger = Logger.getLogger(Sender.class);
+
+    @Override
+    public void run() {
+        while(true){
+            Message message;
+            if ((message = messageQueue.getOutputMessages().poll())!=null){
+                sendMessage(message);
+                logger.debug("Message from "+message.getFromWhom()+" to "+
+                        message.getRecipient()+" within class "+ Sender.class +" has been sent");
+            }
+        }
+    }
 
     /**
      * send Message to the recipient, mentioned in Message object
@@ -50,5 +65,13 @@ public class Sender {
         printWriter.print(message);
         printWriter.flush();
         printWriter.close();
+    }
+
+    public void setMessageQueue(MessageDepot messageQueue) {
+        this.messageQueue = messageQueue;
+    }
+
+    public MessageDepot getMessageQueue() {
+        return messageQueue;
     }
 }

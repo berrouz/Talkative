@@ -12,7 +12,7 @@
 
     <bean id="transceiver" class="com.github.berrouz.common.Transceiver" scope="singleton">
         <property name="receiverThread" ref="receiverThread"/>
-        <property name="senderThread" ref="senderThread"/>
+        <property name="sender" ref="sender"/>
         <property name="threadExecutor" ref="threadExecutor"/>
     </bean>
 
@@ -31,9 +31,8 @@
         <property name="messageQueue" ref="depot"/>
     </bean>
 
-    <bean id="senderThread" class="com.github.berrouz.common.sending.SenderThread" scope="singleton">
+    <bean id="sender" class="com.github.berrouz.common.sending.Sender" scope="singleton">
         <property name="messageQueue" ref="depot"/>
-        <property name="sender" ref="sender"/>
     </bean>
 
     <bean id="threadExecutor" class="com.github.berrouz.common.ThreadExecutor" scope="singleton">
@@ -41,8 +40,6 @@
     </bean>
 
     <bean id="depot" class="com.github.berrouz.common.depot.MessageDepot" scope="singleton"/>
-
-    <bean id="sender" class="com.github.berrouz.common.sending.Sender" scope="singleton"/>
 
 
     <bean id="serverContact" class="com.github.berrouz.common.Contact" scope="singleton">

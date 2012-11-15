@@ -31,9 +31,9 @@ public class SocketReader implements Runnable {
         BufferedReader bufferedReader;
         try {
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            String temp, result = "";
-            while ((temp = bufferedReader.readLine()) != null) {
-                result = result.concat(temp);
+            String line, result = "";
+            while ((line = bufferedReader.readLine()) != null) {
+                result = result.concat(line);
             }
             Message message = new Gson().fromJson(result, Message.class);
             messageQueue.getInputMessages().add(message);

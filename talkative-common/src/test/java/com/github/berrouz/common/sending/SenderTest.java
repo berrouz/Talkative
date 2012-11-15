@@ -18,8 +18,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class SenderTest {
+
     private Message message;
+
     private Sender sender;
+
     @Before
     public void init() throws IOException {
         sender = new Sender();
@@ -57,7 +60,6 @@ public class SenderTest {
             return text.toString();
         }
     }
-
 
     private void startServer(final int port){
         new Thread(new Runnable() {

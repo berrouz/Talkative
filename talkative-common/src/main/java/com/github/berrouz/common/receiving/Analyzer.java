@@ -15,9 +15,8 @@ public abstract class Analyzer implements Runnable{
     private static final Logger logger = Logger.getLogger(Analyzer.class);
 
     /**
-     * run method encompasses activity of sending the message from
-     * input queue to analyze method of concrete Analyzer,
-     * which after processing a message adds  message to SMS queue of Contacts queue
+     * if inputMessages queue is not empty
+     * sends a message to analyze method of concrete Analyzer
      */
     @Override
     public void run() {
