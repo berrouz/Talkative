@@ -1,4 +1,4 @@
-package com.github.berrouz.depot;
+package com.github.berrouz.common.depot;
 
 import com.github.berrouz.common.Contact;
 import com.github.berrouz.common.depot.ContactsList;

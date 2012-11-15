@@ -1,5 +1,6 @@
 package com.github.berrouz.common.sending;
 
+import com.github.berrouz.common.Contact;
 import com.github.berrouz.common.Message;
 import org.apache.log4j.Logger;
 
@@ -20,18 +21,34 @@ public class Sender {
      * @param message
      */
     public void sendMessage(Message message){
-        logger.debug("Sender is going to send message "+ message+ " and connect with " +
-                ""+ message.getRecipient().getIpAddress()+ " and port " + message.getRecipient().getPort());
+        PrintWriter pw = getPrintWriter(message.getRecipient());
+        printToWriter( pw, message.toJson());
+    }
+
+    /**
+     * Opens socket and gets PrintWriter to the recipient
+     * @param recipient
+     * @return
+     */
+    public PrintWriter getPrintWriter(Contact recipient){
+        OutputStreamWriter outputBuffer = null;
         try {
-            Socket socket = new Socket(message.getRecipient().getIpAddress(), message.getRecipient().getPort());
-            OutputStreamWriter outputBuffer = new OutputStreamWriter(socket.getOutputStream());
-            PrintWriter printWriter = new PrintWriter(outputBuffer);
-            printWriter.print(message.toJson());
-            printWriter.flush();
-            printWriter.close();
-            socket.close();
+            Socket socket = new Socket(recipient.getIpAddress(), recipient.getPort());
+            outputBuffer = new OutputStreamWriter(socket.getOutputStream());
         } catch (IOException e) {
-            logger.error("Cannot send Message in "+Sender.class, e);
+            logger.error("Cannot open Socket", e);
         }
+        return new PrintWriter(outputBuffer);
+    }
+
+    /**
+     * prints Data from message to PrintWriter
+     * @param printWriter
+     * @param message
+     */
+    public void printToWriter(PrintWriter printWriter, String message){
+        printWriter.print(message);
+        printWriter.flush();
+        printWriter.close();
     }
 }
