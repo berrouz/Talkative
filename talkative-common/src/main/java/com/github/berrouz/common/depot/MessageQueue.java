@@ -52,7 +52,16 @@ public class MessageQueue<E> {
         }
     }
 
+    // Getters and setters
     public Queue<E> getQueue() {
         return queue;
+    }
+
+    /**
+     * Size of the queue
+     * @return
+     */
+    public int size(){
+        return queue.size();
     }
 }

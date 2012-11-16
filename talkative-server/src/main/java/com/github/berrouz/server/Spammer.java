@@ -1,8 +1,10 @@
 package com.github.berrouz.server;
 
+import com.github.berrouz.common.SendableAsJson;
 import com.github.berrouz.common.depot.MessageDepot;
 import com.github.berrouz.common.Contact;
 import com.github.berrouz.common.Message;
+import com.github.berrouz.common.depot.MessageQueue;
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -21,24 +23,27 @@ public class Spammer {
     public Contact serverContact;
 
     @Inject
-    private MessageDepot messageQueue;
+    private MessageDepot messageDepot;
 
     private static final Logger logger = Logger.getLogger(Spammer.class);
 
     /**
-     * update all clients in currentClientList
+     * send a message to output queue
+     * @param message
      */
+    public void sendToContact(Message message){
+        getMessageQueue().add(message);
+    }
 
-    public void sendToAll(List<Contact> currentContactList){
-        List<Contact> contactList;
-        // update each client with current contact list
-        for (Contact contact: currentContactList){
-            contactList = getCopy(currentContactList);
-            contactList.remove(contact);                        // removes contact of recipient from sent list
-            Message message = new Message(new Gson().toJson(contactList), Message.MESSAGE_TYPES.CONTACT_LIST, contact, serverContact);
-            logger.debug("Sent message is " + message.toString() );
-            messageQueue.getOutputMessages().add(message);
-            logger.debug("Send updated contact list with "+ contactList.size() + " to "+ contact.toString());
+    /**
+     * Send ContactList to all recipients
+     * @param recipients
+     */
+    public void sendToAll(List<Contact> recipients){
+        for(Contact recipient: recipients){
+            List<Contact> contactList = getCopy(recipients);
+            contactList.remove(recipient);
+            sendToContact(createMessage(contactList, recipient, serverContact));
         }
     }
 
@@ -55,11 +60,25 @@ public class Spammer {
         return list;
     }
 
+    protected Message createMessage(List<Contact> contactToBeSent, Contact recipient, Contact sender){
+        return new Message(new Gson().toJson(contactToBeSent), Message.MESSAGE_TYPES.CONTACT_LIST, recipient, sender);
+    }
+
+    // Getters and setter
+
     public void setServerContact(Contact serverContact) {
         this.serverContact = serverContact;
     }
 
-    public void setMessageQueue(MessageDepot messageQueue) {
-        this.messageQueue = messageQueue;
+    public MessageQueue<Message> getMessageQueue() {
+        return messageDepot.getOutputMessages();
+    }
+
+    public void setMessageQueue(MessageQueue<Message> messageQueue) {
+        this.messageDepot.setOutputMessages(messageQueue);
+    }
+
+    public void setMessageDepot(MessageDepot messageDepot) {
+        this.messageDepot = messageDepot;
     }
 }

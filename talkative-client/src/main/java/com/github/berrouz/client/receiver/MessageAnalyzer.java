@@ -19,9 +19,8 @@ public class MessageAnalyzer extends Analyzer {
         logger.debug(message);
         switch (message.getType()) {
             case CONTACT_LIST:
-                Type setType = new TypeToken<Queue<Contact>>() {
-                }.getType();
-                messageQueue.setContactList((LinkedList<Contact>) new Gson().fromJson(message.getData(), setType));
+                Type type = new TypeToken<Queue<Contact>>() {}.getType();
+                messageQueue.setContactList((LinkedList<Contact>) new Gson().fromJson(message.getData(), type));
                 logger.debug("Contact list in "+ this +" has been update. There are "+ messageQueue.getContactList().size() + " contacts");
                 break;
             case SMS:

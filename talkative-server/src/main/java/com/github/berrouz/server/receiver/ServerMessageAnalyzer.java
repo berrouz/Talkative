@@ -1,6 +1,8 @@
 package com.github.berrouz.server.receiver;
 
+import com.github.berrouz.common.Contact;
 import com.github.berrouz.common.Message;
+import com.github.berrouz.common.depot.ContactsList;
 import com.github.berrouz.common.receiving.Analyzer;
 import com.github.berrouz.server.Spammer;
 import org.apache.log4j.Logger;
@@ -19,16 +21,16 @@ public class ServerMessageAnalyzer extends Analyzer {
         switch (message.getType()){
             case ADD_CONTACT    :
                 logger.debug("ADD_CONTACT Message has been received from "+ message.getFromWhom());
-                messageQueue.getContactList().add(message.getFromWhom());
+                getContactList().add(message.getFromWhom());
                 logger.debug("NEW CONTACT "+ message.getFromWhom() + " has been added to the current contact list");
-                spammer.sendToAll(messageQueue.getContactList().getContactList());
+                spammer.sendToAll(getContactList().getList());
                 logger.debug("Contact has been added to contact list on the server and send to clients");
                 break;
             case REMOVE_CONTACT :
-                logger.debug("Contact list before REMOVAL has "+ messageQueue.getContactList().size() +" contacts");
-                messageQueue.getContactList().remove(message.getFromWhom());
-                logger.debug("Contact list after REMOVAL has "+ messageQueue.getContactList().size() +" contacts");
-                spammer.sendToAll(messageQueue.getContactList().getContactList());
+                logger.debug("Contact list before REMOVAL has "+ getContactList().size() +" contacts");
+                getContactList().remove(message.getFromWhom());
+                logger.debug("Contact list after REMOVAL has "+ getContactList().size() +" contacts");
+                spammer.sendToAll(getContactList().getList());
                 break;
 
         }
@@ -36,5 +38,9 @@ public class ServerMessageAnalyzer extends Analyzer {
 
     public void setSpammer(Spammer spammer) {
         this.spammer = spammer;
+    }
+
+    public ContactsList<Contact> getContactList(){
+        return messageDepot.getContactList();
     }
 }

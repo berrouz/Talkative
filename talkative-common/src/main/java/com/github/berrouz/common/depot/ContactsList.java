@@ -30,7 +30,7 @@ public class ContactsList<E> implements Iterable<E>{
      * and has not yet been read by GUI
      * @return
      */
-    public List<E> getContactList() {
+    public List<E> getList() {
         synchronized (contactList){
             if (!changedContactList){
                 try{

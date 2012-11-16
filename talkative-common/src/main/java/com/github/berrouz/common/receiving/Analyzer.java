@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class Analyzer implements Runnable{
 
-    protected MessageDepot messageQueue;
+    protected MessageDepot messageDepot;
 
     private static final Logger logger = Logger.getLogger(Analyzer.class);
 
@@ -21,18 +21,18 @@ public abstract class Analyzer implements Runnable{
     @Override
     public void run() {
         while (true){
-            analyze(messageQueue.getInputMessages().poll());
+            analyze(messageDepot.getInputMessages().poll());
             logger.debug("Message is to be analyzed in "+ this.getClass());
         }
     }
 
     public abstract void analyze(Message message);
 
-    public void setMessageQueue(MessageDepot messageQueue) {
-        this.messageQueue = messageQueue;
+    public void setMessageDepot(MessageDepot messageDepot) {
+        this.messageDepot = messageDepot;
     }
 
-    public MessageDepot getMessageQueue() {
-        return messageQueue;
+    public MessageDepot getMessageDepot() {
+        return messageDepot;
     }
 }

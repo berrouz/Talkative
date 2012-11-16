@@ -34,9 +34,12 @@ public class Controller {
         view.sendButton.addActionListener(new ClickOnSendButtonListener());
         view.addWindowListener(new MainWindowListener());
         view.addWindowListener(new HelloSender());
-        model.sendHelloMessage();
     }
 
+    @PostConstruct
+    public void sendHello(){
+        model.sendHelloMessage();
+    }
     // Listener Class waits for clicking Send Button in View
     private class ClickOnSendButtonListener implements ActionListener {
         @Override

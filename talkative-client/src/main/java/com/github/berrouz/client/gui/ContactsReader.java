@@ -42,7 +42,7 @@ public class ContactsReader implements Runnable{
     @Override
     public void run() {
         while(true){
-            List<Contact> contactList = messageQueue.getContactList().getContactList();
+            List<Contact> contactList = messageQueue.getContactList().getList();
             view.names.removeAllItems();
             for(Contact c: contactList){
                 view.names.addItem(c);

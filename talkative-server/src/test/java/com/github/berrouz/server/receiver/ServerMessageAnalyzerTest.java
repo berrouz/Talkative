@@ -20,8 +20,8 @@ public class ServerMessageAnalyzerTest {
         analyzer = new ServerMessageAnalyzer();
         MessageDepot messageDepot = new MessageDepot();
         Spammer spammer = new Spammer();
-        spammer.setMessageQueue(messageDepot);
-        analyzer.setMessageQueue(messageDepot);
+        spammer.setMessageDepot(messageDepot);
+        analyzer.setMessageDepot(messageDepot);
         analyzer.setSpammer(spammer);
     }
 
@@ -32,6 +32,6 @@ public class ServerMessageAnalyzerTest {
         when(message.getFromWhom()).thenReturn(contact);
         when(message.getType()).thenReturn(Message.MESSAGE_TYPES.ADD_CONTACT);
         analyzer.analyze(message);
-        assertEquals(analyzer.getMessageQueue().getContactList().size(), 1);
+        assertEquals(analyzer.getMessageDepot().getContactList().size(), 1);
     }
 }
