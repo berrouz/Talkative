@@ -10,6 +10,7 @@ import java.util.Queue;
  * @param <E>
  */
 public class MessageQueue<E> {
+
     // input queue
     private final Queue<E> queue;
 
@@ -17,6 +18,10 @@ public class MessageQueue<E> {
 
     public MessageQueue(){
         this.queue = new LinkedList<E>();
+    }
+
+    public MessageQueue(LinkedList queue){
+        this.queue = queue;
     }
 
     /**
